@@ -10,6 +10,15 @@
     <p>by {{ author }}</p>
     <p>Pub. {{ pub_year }}</p>
 
+    <h3>Reviews</h3>
+    <a href="{% url 'review_book' id %}">Write review</a><br /><br />
+    {% if not reviews %}
+    <p>No reviews for this book :(</p>
+    {% endif %}
+    {% for review in reviews %}
+        <b>{{ review.rating }}/5</b>
+        <p>{{ review.text }}</p>
+    {% endfor %}
     <a href="{% url 'list_books' %}">Go back</a>
 </body>
 
