@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 from reviews import views as reviewsViews
 
+app_name = "books"
 urlpatterns = [
     path("", views.index, name="index"),
     path("list/", views.ListBooks, name="list_books"),

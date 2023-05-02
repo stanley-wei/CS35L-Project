@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from books.models import Book
 from .forms import ReviewForm
 from .models import Review
 
+@login_required
 def MakeReview(request, book_id):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -25,4 +27,4 @@ def MakeReview(request, book_id):
     else:
         form = ReviewForm()
 
-    return render(request, "reviews/review_book.html", {"form": form, "book": book_id})
+    return render(request, "reviews/review_book.html", {"form": form, "book": Book.objects.get(pk=book_id)})
