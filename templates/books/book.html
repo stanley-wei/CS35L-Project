@@ -1,18 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>{{ title }}</h3>
-    <p>by {{ author }}</p>
-    <p>Pub. {{ pub_year }}</p>
+    <h3>{{ book.title }}</h3>
+    <p>by {{ book.author }}</p>
+    <p>Pub. {{ book.pub_year }}</p>
 
     <h3>Reviews</h3>
-    <a href="{% url 'books:review_book' id %}">Write review</a><br /><br />
-    {% if not reviews %}
-    <p>No reviews for this book :(</p>
+    {% if not user_review %}
+        <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />
+        {% if not reviews  %}
+        <p>No reviews for this book :(</p>
+        {% endif %}
+    {% else %}
+        <h4>Your review:</h4>
+        <div style = "margin-left:15px;">
+            <b><a href="{% url 'profiles:profile' user.id %}">{{user.username}}</a>: {{ user_review.rating }}/5</b>
+            <p>{{ user_review.text }}</p>
+            <a href="{% url 'books:edit_review' book.id %}">Edit Review</a>
+        </div>
     {% endif %}
+
+
     {% for review in reviews %}
         <b><a href="{% url 'profiles:profile' review.user.id %}">{{review.user.username}}</a>: {{ review.rating }}/5</b>
         <p>{{ review.text }}</p>
     {% endfor %}
+
+    <br/>
     <a href="{% url 'books:list_books' %}">Go back</a>
+
 {% endblock %}

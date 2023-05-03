@@ -12,7 +12,7 @@
                     {% if book.avg_rating != 0.0 %}
                         <p>
                             <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
-                            ({{book.avg_rating}} / 5.0)
+                            ({{book.avg_rating}} / 5)
                         </p>
                     {% else %}
                         <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>

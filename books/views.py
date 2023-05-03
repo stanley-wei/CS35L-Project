@@ -10,12 +10,11 @@ def index(request):
 def displayBookInfo(request, book_id):
     book = Book.objects.get(pk=book_id)
     reviews = Review.objects.filter(book__id=book_id)
+    user_review = reviews.filter(user=request.user)
     context = {
-        "id": book.id,
-        "title": book.title,
-        "author": book.author,
-        "pub_year": book.pub_year,
-        "reviews": reviews
+        "book": book,
+        "reviews": reviews.exclude(user=request.user),
+        "user_review": None if not user_review else user_review[0],
     }
     return render(request, "books/book.html", context);
 
