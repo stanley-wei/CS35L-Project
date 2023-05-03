@@ -11,7 +11,7 @@
     <p>No reviews for this book :(</p>
     {% endif %}
     {% for review in reviews %}
-        <b>{{ review.rating }}/5</b>
+        <b><a href="{% url 'profiles:profile' review.user.id %}">{{review.user.username}}</a>: {{ review.rating }}/5</b>
         <p>{{ review.text }}</p>
     {% endfor %}
     <a href="{% url 'books:list_books' %}">Go back</a>

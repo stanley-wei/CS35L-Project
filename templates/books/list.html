@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container-fluid">
         {% for book in books %}
-        <b><a href="{% url 'books:book' book.id %}">{{ book.title }} ({{ book.pub_year }})</a></b>
+        <b><a href="{% url 'books:view_book' book.id %}">{{ book.title }} ({{ book.pub_year }})</a></b>
         <p>{{ book.avg_rating }}</p>
         <p>{{ book.author }}</p>
         {% endfor %}

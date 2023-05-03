@@ -21,7 +21,7 @@ def MakeReview(request, book_id):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse("book", args=(book_id,)))
+            return HttpResponseRedirect(reverse("books:view_book", args=(book_id,)))
 
     # if a GET (or any other method) we'll create a blank form
     else:

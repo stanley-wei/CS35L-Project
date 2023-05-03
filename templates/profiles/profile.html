@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>User: {{profile_user.username}}</h2>
+    <p>User since {{profile_user.date_joined.date}}</p>
+    <h2>Reviews:</h2>
+    {% for review in reviews %}
+        <div>
+            <b>Review for: <a href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a></b>
+            <p>Rating: {{review.rating}}</p>
+            <p>Review: {{review.text}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

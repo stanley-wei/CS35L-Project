@@ -5,8 +5,7 @@ from reviews import views as reviewsViews
 
 app_name = "books"
 urlpatterns = [
-    path("", views.index, name="index"),
     path("list/", views.ListBooks, name="list_books"),
-    path("<int:book_id>/", views.displayBookInfo, name="book"),
+    path("<int:book_id>/", views.displayBookInfo, name="view_book"),
     path("<int:book_id>/review/", reviewsViews.MakeReview, name="review_book")
 ]
