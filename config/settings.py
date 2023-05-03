@@ -10,11 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import environ
+import os
 from pathlib import Path
+from urllib.parse import quote_plus as urlquote
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -41,6 +46,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'rest_framework',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
 
     'books.apps.BooksConfig',
     'reviews.apps.ReviewsConfig',
@@ -139,3 +148,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/books/list"
 ACCOUNT_LOGOUT_REDIRECT_URL ="/books/list"
+
+elk_base_url = f'elasticsearch://{env("ELASTICSEARCH_USER")}:{env("ELASTICSEARCH_PWD")}@localhost:9200'
+elastic_search_url = elk_base_url.format(user_name=f'{env("ELASTICSEARCH_USER")}',
+                                         password=urlquote(f'{env("ELASTICSEARCH_PWD")}'),
+                                         # password may contain special characters
+                                         host_ip='localhost',
+                                         host_port=9200)
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
