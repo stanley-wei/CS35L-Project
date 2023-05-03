@@ -3,9 +3,23 @@
 {% block content %}
     <div class="container-fluid">
         {% for book in books %}
-        <b><a href="{% url 'books:view_book' book.id %}">{{ book.title }} ({{ book.pub_year }})</a></b>
-        <p>{{ book.avg_rating }}</p>
-        <p>{{ book.author }}</p>
+            <div>
+                <span>
+                    <a href="{% url 'books:view_book' book.id %}" style="font-weight:bold;">{{ book.title }} ({{ book.pub_year }})</a>
+                         by {{book.author}}
+                </span>
+                <div class="book-info">
+                    {% if book.avg_rating != 0.0 %}
+                        <p>
+                            <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
+                            ({{book.avg_rating}} / 5.0)
+                        </p>
+                    {% else %}
+                        <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <br />
         {% endfor %}
     </div>
 {% endblock %}

@@ -1,0 +1,14 @@
+nav {
+    padding: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.login_status {
+    float: right;
+}
+
+.login_status a {
+    margin-left: 5px;
+    margin-right: 5px;
+}

@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', RedirectView.as_view(url="/books/list"), name='home'),
     path('accounts/', include('allauth.urls')),
@@ -25,4 +28,4 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("profiles/", include("profiles.urls", namespace="profiles")),
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
