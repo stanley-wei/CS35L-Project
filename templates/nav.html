@@ -1,7 +1,21 @@
 <nav> 
-    <span><a href="{% url 'books:list_books' %}">Books</a></span> 
+    <!-- Dropdown [test]
+    <span class="dropdown">
+        <button class="dropbtn">
+            <a href="{% url 'books:list_books' %}">Books</a>
+        </button>
+        <div class="dropdown-content">
+            <a href="{% url 'books:top_ten' %}">Top-Rated</a>
+          </div>
+    </span>  
+    -->
 
-    <span class="login_status">
+    <span class="menu-items">
+            <a href="{% url 'books:list_books' %}">Books</a>
+            <a href="{% url 'books:top_ten' %}">Top-Rated</a>
+    </span>
+
+    <span class="login-status">
         {% if user.is_authenticated %}
                 <a>User: {{user.username}}</a>
                 <a href="{% url 'account_logout' %}">Logout</a>

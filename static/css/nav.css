@@ -4,11 +4,49 @@ nav {
     border-bottom: 1px solid black;
 }
 
-.login_status {
+.login-status {
     float: right;
 }
 
-.login_status a {
+.login-status a {
     margin-left: 5px;
     margin-right: 5px;
 }
+
+.menu-items a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* Dropdown [test]
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+
+    background-color: #ffffff;
+    min-width: 70px;
+    padding: 5px;
+}
+
+.dropdown-content:hover {
+    background-color: #f69e9e;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ff00003b;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+*/
