@@ -9,6 +9,7 @@ Professor: Paul Eggert
 *Note: requires Python3.*
 <ol>
   <li>Clone this repository to a local directory: <code>git clone https://github.com/stanley-wei/CS35L-Project.git</code>
+  <li><code>cd</code> into the project directory</li>
   <li>Install the required packages: <code>python -m pip install -r requirements.txt</code>
     <ul>
       <li>Optional: Create a virtual environment before installing.</li>
