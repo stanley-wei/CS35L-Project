@@ -16,8 +16,8 @@
     </span>
 
     <span class="search-bar">
-        <form action="{% url 'books:list_books' %}">
-            <input type="text" placeholder="Search Bar"/>
+        <form method="GET" action="{% url 'books:search_books' %}">
+            <input type="text" name="query" placeholder="Search Bar"/>
             <button type="submit">Submit</button>
         </form>
     </span>
