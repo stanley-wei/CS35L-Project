@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% if results %}
+            <h2>Search Results:</h2>
+                {% for book in results %}
+                    <div>
+                        <span>
+                            <a href="{% url 'books:view_book' book.id %}" style="font-weight:bold;">{{ book.title }} ({{ book.pub_year }})</a>
+                                by {{book.author}}
+                        </span>
+                        <div class="book-info">
+                            {% if book.avg_rating != 0.0 %}
+                                <p>
+                                    <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
+                                    ({{book.avg_rating}} / 5)
+                                </p>
+                            {% else %}
+                                <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br />
+                {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

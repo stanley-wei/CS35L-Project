@@ -9,7 +9,7 @@
     {% if not user_review %}
         <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />
         {% if not reviews  %}
-        <p>No reviews for this book :(</p>
+        <p>No reviews for this book :</p>
         {% endif %}
     {% else %}
         <h4>Your review:</h4>
