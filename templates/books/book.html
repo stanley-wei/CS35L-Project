@@ -21,6 +21,31 @@
         <br/>
     {% endif %}
 
+    <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
+        <label for="sort">Filter by:</label>
+        <select id="sort" name="sort">
+            <option value="">No Filter</option>
+            <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
+            <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
+        </select>
+    </form>
+    <br/>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sortSelect = document.getElementById('sort');
+            var sortOptions = localStorage.getItem('sort_options');
+    
+            if (sortOptions) {
+                sortSelect.value = sortOptions;
+            }
+    
+            sortSelect.addEventListener('change', function() {
+                localStorage.setItem('sort_options', this.value);
+                document.getElementById('sort-form').submit();
+            });
+        });
+    </script>
 
     {% for review in reviews %}
         <b><a href="{% url 'profiles:profile' review.user.id %}">{{review.user.username}}</a>: {{ review.rating }}/5</b>

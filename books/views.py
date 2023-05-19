@@ -12,11 +12,19 @@ def displayBookInfo(request, book_id):
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user)
         reviews = reviews.exclude(user=request.user)
+
+    sort_options = request.GET.get('sort')
+    if sort_options == 'favorable':
+        reviews = reviews.order_by('-rating')  # Sort by most favorable
+    elif sort_options == 'unfavorable':
+        reviews = reviews.order_by('rating')  # Sort by least favorable
+
     context = {
         "book": book,
         "reviews": reviews,
         "user_review": None if not user_review else user_review[0],
     }
+
     return render(request, "books/book.html", context);
 
 def ListBooks(request):
