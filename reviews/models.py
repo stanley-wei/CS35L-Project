@@ -9,4 +9,5 @@ class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     rating = models.IntegerField(blank=False, default=0)
-    text = models.CharField(max_length=500);
+    text = models.CharField(blank=False,max_length=500)
+    images = models.ImageField(upload_to='review_images/',blank=True);
