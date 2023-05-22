@@ -1,4 +1,4 @@
-<nav> 
+<nav>
     <!-- Dropdown [test]
     <span class="dropdown">
         <button class="dropbtn">
@@ -11,24 +11,43 @@
     -->
 
     <span class="menu-items">
-            <a href="{% url 'books:list_books' %}">Books</a>
-            <a href="{% url 'books:top_ten' %}">Top-Rated</a>
+        <a href="{% url 'books:list_books' %}">
+            <button type="books" class="nav-button">Directory</button>
+        </a>
+        <a href="{% url 'books:top_ten' %}">
+            <button type="rating" class="nav-button">Top-Rated</button>
+        </a>
     </span>
 
     <span class="search-bar">
         <form method="GET" action="{% url 'books:search_books' %}">
-            <input type="text" name="query" placeholder="Search Bar"/>
-            <button type="submit">Submit</button>
+            <input type="text" name="query" placeholder="Search" />
         </form>
     </span>
-
+    
     <span class="login-status">
         {% if user.is_authenticated %}
-                <a>User: {{user.username}}</a>
-                <a href="{% url 'account_logout' %}">Logout</a>
+        <div class="dropdown">
+            <button class="hamburger-menu-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="text">{{user.username}}</span>
+                <span class="hamburger">
+                    <div class="hamburger-icon"></div>
+                    <div class="hamburger-icon"></div>
+                    <div class="hamburger-icon"></div>
+                </span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+            </div>
+        </div>
+        
         {% else %}
-                <a href="{% url 'account_signup' %}">Sign Up</a>
-                <a href="{% url 'account_login' %}">Login</a>
+        <a href="{% url 'account_signup' %}">
+            <button type="signup" class="nav-button">Sign Up</button></a>
+        <a href="{% url 'account_login' %}">
+            <button type="login" class="nav-button">Login</button>
+        </a>
         {% endif %}
     </span>
 
