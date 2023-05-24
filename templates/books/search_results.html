@@ -13,7 +13,7 @@
                         <div class="book-info">
                             {% if book.avg_rating != 0.0 %}
                                 <p>
-                                    <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
+                                    <div class="stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
                                     ({{book.avg_rating}} / 5)
                                 </p>
                             {% else %}
