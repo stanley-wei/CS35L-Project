@@ -3,7 +3,13 @@
 {% block content %}
     <div class="container-fluid">
         {% if results %}
-            <h2>Search Results:</h2>
+        <h2 class="search-statement">
+            {% if results|length == 1 %}
+                Showing 1 result for "{{request.GET.query}}"
+            {% else %}
+                Showing {{ results|length }} results for "{{request.GET.query}}"
+            {% endif %}
+        </h2>
                 {% for book in results %}
                     <div>
                         <span>
@@ -20,6 +26,7 @@
                                 <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>
                             {% endif %}
                         </div>
+
                     </div>
                     <br />
                 {% endfor %}
