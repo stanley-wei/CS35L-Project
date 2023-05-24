@@ -20,8 +20,8 @@
     </span>
 
     <span class="search-bar">
-        <form id="search-bar" method="GET" action="{% url 'books:search_books' %}">
-            <input type="text" name="query" placeholder="Search" {% if query %}value={{query}} {% endif %}/>
+        <form id="search-bar"  method="GET" action="{% url 'books:search_books' %}">
+            <input type="text" name="query" placeholder="Search" />
         </form>
     </span>
     
@@ -37,7 +37,7 @@
                 </span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="{% url 'profiles:user-profile' user.id %}">Profile</a>
               <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
             </div>
         </div>
