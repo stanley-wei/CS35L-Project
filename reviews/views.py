@@ -49,3 +49,36 @@ def EditReview(request, book_id):
         form = ReviewForm(initial={"rating": review.rating, "text": review.text})
 
     return render(request, "reviews/review_book.html", {"form": form, "book": Book.objects.get(pk=book_id)})
+
+@login_required
+def LikeDislike(request, book_id):
+    if request.method == "POST":
+        review_id = request.POST.get("review_id")
+        reaction = request.POST.get("reaction")
+
+        review = Review.objects.get(pk=review_id)
+
+        if reaction == "like":
+            #Check if user reacted previously
+            if request.user not in review.likes.all():
+            #if they haven't, then add to total likes
+                review.likes.add(request.user)
+                #if they have previously disliked
+                if request.user in review.dislikes.all():
+                    review.dislikes.remove(request.user)
+            else:
+                review.likes.remove(request.user)
+        elif reaction == "dislike":
+            #Check if user reacted previously
+            if request.user not in review.dislikes.all():
+            #if they haven't, then add to total dislikes
+                review.dislikes.add(request.user)
+                #if they have previously liked
+                if request.user in review.likes.all():
+                    review.likes.remove(request.user)
+            else:
+                review.dislikes.remove(request.user)
+
+        review.save()
+
+        return redirect("books:view_book", book_id=book_id)
