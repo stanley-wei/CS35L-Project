@@ -1,6 +1,6 @@
 
 .container-fluid {
-    background-color: #E1E1E1;
+    background-color: #e1ebe7;
 }
 
 .months {
@@ -58,11 +58,7 @@
     margin-left: 10%;
 }
 
-.stars-text{
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: large;   
-}
+
 
 
 
