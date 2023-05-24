@@ -47,9 +47,18 @@ def TopTen(request):
 def SearchBooks(request):
     form = BookSearchForm(request.GET)
     results = []
+    query = None;
 
     if form.is_valid():
         query = form.cleaned_data['query']
         results = Book.objects.filter(Q(title__icontains=query)|Q(author__icontains=query))
 
-    return render(request, 'books/search_results.html', {'form': form, 'results': results})
+        sort_options = request.GET.get('sort-search')
+        if sort_options == 'alphabetical':
+            results = results.order_by('title')
+        elif sort_options == 'highest-rated':
+            results = sorted(results, key=lambda book: book.avg_rating, reverse=True)
+        elif sort_options == 'lowest-rated':
+            results = sorted(results, key=lambda book: book.avg_rating)
+
+    return render(request, 'books/search_results.html', {'form': form, 'results': results, 'query':query})
