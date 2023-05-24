@@ -41,12 +41,14 @@
     font-weight: 400;
     font-size: x-large;
     margin-right: 10%;
+    margin-left: 2%;
 }
 
 .book-author{
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-    font-size: large;   
+    font-size: large; 
+    margin-left: 2%;  
 }
 
 .books{
@@ -57,6 +59,14 @@
     margin-right: 10%;
     margin-left: 10%;
 }
+
+.no-reviews{
+    font-family: 'Poppins';
+    font-size: small;
+    font-weight: bold;
+}
+
+
 
 
 
