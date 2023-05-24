@@ -38,13 +38,17 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Profile</a>
                 <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-            </div>
-        </div>
-        {% else %}
-        <a href="{% url 'account_signup' %}">Sign Up</a>
-        <a href="{% url 'account_login' %}">Login</a>
-        {% endif %}
-    </span>
+              </div>
+          </div>
+          
+          {% else %}
+          <a href="{% url 'account_signup' %}">
+              <button type="signup" class="nav-button">Sign Up</button></a>
+          <a href="{% url 'account_login' %}">
+              <button type="login" class="nav-button">Login</button>
+          </a>
+          {% endif %}
+      </span>
 
 
 
