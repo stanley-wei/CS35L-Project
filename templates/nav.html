@@ -20,8 +20,8 @@
     </span>
 
     <span class="search-bar">
-        <form method="GET" action="{% url 'books:search_books' %}">
-            <input type="text" name="query" placeholder="Search" />
+        <form id="search-bar" method="GET" action="{% url 'books:search_books' %}">
+            <input type="text" name="query" placeholder="Search" {% if query %}value={{query}} {% endif %}/>
         </form>
     </span>
     

@@ -22,7 +22,7 @@
     {% endif %}
 
     <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
-        <label for="sort">Filter by:</label>
+        <label for="sort">Sort reviews by:</label>
         <select id="sort" name="sort">
             <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
             <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>

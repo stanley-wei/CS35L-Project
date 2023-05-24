@@ -4,6 +4,45 @@
     <div class="container-fluid">
         {% if results %}
             <h2>Search Results:</h2>
+
+            <form id="sort-search-form" method="GET" action="{% url 'books:search_books' %}">
+                <label for="sort-search">Sort results by:</label>
+                <select id="sort-search" name="sort-search">
+                    <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
+                    <option value="alphabetical" {% if sort_options == 'alphabetical' %}selected{% endif %}>Alphabetical</option>
+                    <option value="highest-rated" {% if sort_options == 'highest-rated' %}selected{% endif %}>Highest Rated</option>
+                    <option value="lowest-rated" {% if sort_options == 'lowest-rated' %}selected{% endif %}>Lowest Rated</option>
+                </select>
+            </form>
+            <br/>
+        
+            <script>
+                const url = new URL(document.URL);
+                const urlParams = new URLSearchParams(window.location.search);
+                document.addEventListener('DOMContentLoaded', function() {
+                    
+                    // Clears selected filters from previous pages
+                    window.addEventListener('load', function() {
+                        localStorage.removeItem('sort_options');
+                    });
+                    
+                    var sortSelect = document.getElementById('sort-search');
+                    var sortOptions = localStorage.getItem('sort_options');
+            
+        
+                    if (sortOptions) {
+                        sortSelect.value = sortOptions;
+                    }
+            
+                    sortSelect.addEventListener('change', function() {
+                        localStorage.setItem('sort_options', this.value);
+                        url.searchParams.set('sort-search', this.value);
+                        url.searchParams.set('query', urlParams.get('query'));
+                        window.location.href = url;
+                    });
+                });
+            </script>
+
                 {% for book in results %}
                     <div>
                         <span>
