@@ -19,8 +19,6 @@
         {% csrf_token %}
         {{ form }}
         <a href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Upload Profile Picture </a>
-
-
     </form>
 
 
@@ -40,6 +38,7 @@
             <div class="review-contents">
                 <p>Rating: {{review.rating}}</p>
                 <p>Review: {{review.text}}</p>
+                <a href="{% url 'books:edit_review' review.book.id %}">Edit Review</a>
             </div>
         </div>
     {% endfor %}
