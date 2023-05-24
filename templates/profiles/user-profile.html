@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- {% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %} -->
+
+{% block content %}
+    <h2>User: {{profile_user.username}}</h2>
+    <p>User since {{profile_user.date_joined.date}}</p>
+    {% if profile_user.profile_picture %}
+        <img src="{{ profile_user.profile_picture }}" alt="Profile Picture">
+    {% endif %}
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <a href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Upload Profile Picture </a>
+
+    </form>
+
+
+    <h2>Favorite Books:</h2>
+
+    <h2>Reviews:</h2>
+    {% for review in reviews %}
+        <div class="review-row">
+            <div class="review-book">
+                <b>Review for: 
+                    <a href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
+                </b>
+            </div>
+            <div class="review-contents">
+                <p>Rating: {{review.rating}}</p>
+                <p>Review: {{review.text}}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
