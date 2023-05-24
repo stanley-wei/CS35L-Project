@@ -26,6 +26,20 @@
         {% if user.is_authenticated %}
                 <a href="{% url 'profiles:user-profile' user.id %}">User: {{user.username}}</a>
                 <a href="{% url 'account_logout' %}">Logout</a>
+                <div class="dropdown">
+                    <button class="hamburger-menu-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text">{{user.username}}</span>
+                        <span class="hamburger">
+                            <div class="hamburger-icon"></div>
+                            <div class="hamburger-icon"></div>
+                            <div class="hamburger-icon"></div>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Profile</a>
+                      <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                    </div>
+                </div>
         {% else %}
                 <a href="{% url 'account_signup' %}">Sign Up</a>
                 <a href="{% url 'account_login' %}">Login</a>
