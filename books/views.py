@@ -4,6 +4,8 @@ from .models import Book
 from reviews.models import Review
 from .forms import BookSearchForm
 
+from django.db.models import Q
+
 
 def displayBookInfo(request, book_id):
     book = Book.objects.get(pk=book_id)
@@ -48,6 +50,6 @@ def SearchBooks(request):
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        results = Book.objects.filter(title__icontains=query)
+        results = Book.objects.filter(Q(title__icontains=query)|Q(author__icontains=query))
 
     return render(request, 'books/search_results.html', {'form': form, 'results': results})
