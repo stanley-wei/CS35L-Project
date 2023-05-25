@@ -57,6 +57,20 @@
     {% for review in reviews %}
         <b><a href="{% url 'profiles:profile' review.user.id %}">{{review.user.username}}</a>: {{ review.rating }}/5</b>
         <p>{{ review.text }}</p>
+
+        <!--Like/Dislike Buttons for Reviews-->
+        <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="review_id" value="{{ review.id }}">
+            <input type="hidden" name="reaction" value="like">
+            <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
+        </form>
+        <form id="dislike_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="review_id" value="{{ review.id }}">
+            <input type="hidden" name="reaction" value="dislike">
+            <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
+        </form>
     {% endfor %}
 
     <br/>

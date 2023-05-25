@@ -13,5 +13,7 @@ urlpatterns = [
     path("<int:book_id>/review/", reviewsViews.MakeReview, name="review_book"),
     path("<int:book_id>/review/edit", reviewsViews.EditReview, name="edit_review"),
 
+    path("<int:book_id>/review/like_dislike", reviewsViews.LikeDislike, name="like_dislike"),
+
     path('search/', views.SearchBooks, name='search_books')
 ]
