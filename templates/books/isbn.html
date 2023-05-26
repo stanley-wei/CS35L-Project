@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <span class="isbn-search">
+        <form id="isbn-search"  method="GET" action="{% url 'books:search_isbn' %}">
+            <input type="text" name="isbn" placeholder="Enter ISBN10 here"
+                {% if query %} value="{{query}}" {% endif %} />
+        </form>
+    </span>
+
+    {% if title %}
+        {{title}} by {{authors}} ({{pub_year}})
+        <input type="submit" id="isbn-submit"" onclick=/>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("isbn-submit").addEventListener("click", function() {
+                url = "{% url 'books:create_from_isbn' %}"
+                url += "?isbn={{query}}"
+                window.location.href = url;
+            })        
+        });
+
+    </script>
+{% endblock %}
