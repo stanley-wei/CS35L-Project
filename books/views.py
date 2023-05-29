@@ -81,7 +81,7 @@ def SearchIsbn(request):
         edition = ol.Edition.get(isbn=query)
         if(edition):
             title = edition.title;
-            authors = ','.join(author_obj.name for author_obj in edition.authors)
+            authors = ', '.join(author_obj.name for author_obj in edition.authors)
             t = re.search('\d{% s}'% 4, edition.publish_date)
             pub_year = (int(t.group(0)) if t else None)
 
@@ -105,7 +105,8 @@ def CreateFromIsbn(request):
     pub_year = (int(t.group(0)) if t else None)
 
     book_obj = Book(title = edition.title, 
-                     author = ','.join(author_obj.name for author_obj in edition.authors),
+                     author = ', '.join(author_obj.name for author_obj in edition.authors),
+                     isbn=isbn,
                      pub_year = pub_year)
     book_obj.save()
 
