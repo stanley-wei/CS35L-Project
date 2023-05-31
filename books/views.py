@@ -79,7 +79,7 @@ def FavoriteBook(request, book_id):
 
     try:
         profile = UserProfile.objects.filter(user=user)[0] 
-    except UserProfile.DoesNotExist:
+    except:
         profile = UserProfile.objects.create(user=user)
 
     if book in profile.favorite_books.all():
