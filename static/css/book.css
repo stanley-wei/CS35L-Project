@@ -1,0 +1,152 @@
+.like-buttons{
+    border:none;
+    color: #000000;
+}
+
+a.go-back-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgb(246, 205, 211);
+    color: black;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-family:Verdana;
+    font-size:10px;
+    margin-left:5px;
+    margin-top:5px;
+  }
+  
+  a.go-back-button:hover {
+    background-color: white;
+  }
+  
+h5{
+    font-family: Verdana;
+    font-size: 15px;
+    text-align: center;
+    margin-right:30px;
+    font-weight: normal;
+}
+/* Styles for the split layout */
+.container {
+    display: flex;
+  }
+  
+  .left-section {
+    flex: 1;
+    margin-right: 20px;
+    background-color: #FDF7E8;;
+  }
+  
+  .right-section {
+    flex: 1;
+    height: 85vh; /* Set a fixed height for the right section */
+    overflow: auto; /* Enable scrolling when content overflows */
+  }
+  
+  h3 {
+    font-family: Verdana, Arial, sans-serif; /* Specify alternative fallback fonts */
+    font-size: 20px;
+    margin-top: 80px;
+    font-weight: bold; /* Use "bold" instead of "normal" for a stronger emphasis */
+  }
+  
+  .rev-button {
+    display: inline-block;
+    font-family: Verdana;
+    text-transform: lowercase;
+    color: black;
+    background-color: white;
+
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+h6{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    max-width: 500px;
+    min-height: 100px;
+}
+  
+  div {
+    /* Styles for the user's review container */
+    margin-left: 15px;
+  }
+  
+  a.user-profile-button {
+    margin-top:20px;
+    display: inline-flex;
+    padding: 5px 10px;
+    background-color: white; /* Set the background color */
+    color: black; /* Set the text color */
+    text-decoration: none;
+    border-radius: 4px; /* Add some border radius for rounded corners */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:normal;
+    font-size: 12px;
+    max-width:fit-content;
+  }
+  a.user-profile-button:hover {
+    display:block;
+    background-color: #f2f2f2; /* Set the background color on hover */
+  }
+  form#sort-form {
+    margin-top: 40px;
+    display: inline-block;
+    margin-left:300px;
+  }
+  
+  label[for="sort"] {
+    font-weight: normal;
+    font-size:12px;
+    font-family: Verdana;
+  }
+  
+  select#sort {
+    padding: 5px;
+    font-size: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  /* Style the selected option */
+  select#sort option:checked {
+    font-weight: bold;
+  }
+  
+  /* Style the option elements */
+  select#sort option {
+    padding: 5px;
+  }
+  
+form#like_review,
+form#dislike_review {
+  margin-top: 10px; /* Add some spacing between the buttons */
+}
+
+button.like-buttons {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(128, 203, 228);
+  color: #fff;
+  cursor: pointer;
+}
+
+button.like-buttons:hover {
+  background-color: #386fa9;
+}
+
+  
