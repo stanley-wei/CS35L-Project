@@ -22,9 +22,12 @@
     </form>
 
 
-
-
     <h2>Favorite Books:</h2>
+    {% for book in profile.favorite_books.all %}
+        <p><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
+    {% empty %}
+        <p>No favorite books.</p>
+    {% endfor %}
 
 
     <h2>Reviews:</h2>

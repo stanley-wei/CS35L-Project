@@ -19,10 +19,12 @@ def profile(request, user_id):
 def user_profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
     if profile_user is not None:
+        profile = UserProfile.objects.filter(user=profile_user)[0] 
         reviews = Review.objects.filter(user=profile_user)
         context =  {
             'profile_user': profile_user,
-            'reviews': reviews
+            'reviews': reviews,
+            'profile': profile
         }
         return render(request, 'profiles/user-profile.html', context)
     return None

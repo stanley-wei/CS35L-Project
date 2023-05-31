@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import Book
 from reviews.models import Review
 from .forms import BookSearchForm
 
 from django.db.models import Q
+
+from profiles.models import UserProfile
 
 
 def displayBookInfo(request, book_id):
@@ -14,6 +17,7 @@ def displayBookInfo(request, book_id):
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user)
         reviews = reviews.exclude(user=request.user)
+        profile = UserProfile.objects.filter(user=request.user)[0] 
 
     sort_options = request.GET.get('sort')
     if sort_options == 'favorable':
@@ -25,6 +29,7 @@ def displayBookInfo(request, book_id):
         "book": book,
         "reviews": reviews,
         "user_review": None if not user_review else user_review[0],
+        "profile": profile
     }
 
     return render(request, "books/book.html", context);
@@ -62,3 +67,21 @@ def SearchBooks(request):
             results = sorted(results, key=lambda book: book.avg_rating)
 
     return render(request, 'books/search_results.html', {'form': form, 'results': results, 'query':query})
+
+@login_required
+def FavoriteBook(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    user = request.user
+
+    try:
+        profile = UserProfile.objects.filter(user=user)[0] 
+    except UserProfile.DoesNotExist:
+        profile = UserProfile.objects.create(user=user)
+
+    if book in profile.favorite_books.all():
+        profile.favorite_books.remove(book)
+    else:
+        profile.favorite_books.add(book)
+
+    profile.save()
+    return redirect("books:view_book", book_id=book_id)
