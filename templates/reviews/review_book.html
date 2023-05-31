@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>tell us about your latest read</h1>
-  <h2>please fill in the following fields with as much detail as possible 
-    thank you for helping out other great readers like yourself! happy reading :)</h2>
-  <h2>review: {{book.title}} ({{book.pub_year}})</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">submit</button>
-  </form>
+  <h1>tell us about your recent read</h1>
+  <h2>please fill in the following fields with as much detail as possible</h2>
+  <h2>thank you for helping out other great readers like yourself! happy reading :)</h2>
+
+  <h4>Reviewing "{{book.title}}" ({{book.pub_year}})</h4>
+  <div class="review">
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <p>
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      <button type="submit" class="sub-button">submit</button>
+    </form>
+  </div>
 {% endblock %}
