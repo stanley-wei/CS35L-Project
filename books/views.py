@@ -14,10 +14,14 @@ def displayBookInfo(request, book_id):
     book = Book.objects.get(pk=book_id)
     reviews = Review.objects.filter(book__id=book_id)
     user_review = None
+    profile = None
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user)
         reviews = reviews.exclude(user=request.user)
-        profile = UserProfile.objects.filter(user=request.user)[0] 
+        try:
+            profile = UserProfile.objects.filter(user=request.user)[0] 
+        except:
+            profile = UserProfile.objects.create(user=request.user)
 
     sort_options = request.GET.get('sort')
     if sort_options == 'favorable':
