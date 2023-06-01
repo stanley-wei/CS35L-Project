@@ -2,12 +2,18 @@
     background-color: #e1ebe7;
 }
 
+.sort-search{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: small;
+}
 .search-statement{
     font-family: 'Poppins';
     font-style: normal;
     font-size: small;
     font-weight: bold;
     color:black;
+    text-align:start;
 }
 
 .book-image{
