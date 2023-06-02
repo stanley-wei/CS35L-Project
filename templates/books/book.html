@@ -13,9 +13,9 @@
     <div class="right-section">
         <h3 class = "reviews">Reviews</h3>
         {% if not user_review %}
-            <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />
+            <a class="write-rev-button" href="{% url 'books:review_book' book.id %}">Leave a Review</a>
             {% if not reviews  %}
-            <p>No reviews for this book :</p>
+            <p class = "no-rev">No reviews for this book :</p>
             {% endif %}
         {% else %}
             <h5 class ="personal-review">Your Review:</h5>
