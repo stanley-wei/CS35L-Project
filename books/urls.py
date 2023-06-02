@@ -14,6 +14,10 @@ urlpatterns = [
     path("<int:book_id>/review/edit", reviewsViews.EditReview, name="edit_review"),
 
     path("<int:book_id>/review/like_dislike", reviewsViews.LikeDislike, name="like_dislike"),
+    path('<int:book_id>/favorite', views.FavoriteBook, name='favorite_book'),
 
-    path('search/', views.SearchBooks, name='search_books')
+    path('search/', views.SearchBooks, name='search_books'),
+
+    path('search_isbn/', views.SearchIsbn, name='search_isbn'),
+    path('isbn_create/', views.CreateFromIsbn, name='create_from_isbn')
 ]

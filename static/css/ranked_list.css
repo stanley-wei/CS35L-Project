@@ -1,0 +1,81 @@
+
+.container-fluid {
+    background-color: #e1ebe7;
+}
+
+.months {
+    text-align:center;
+    -webkit-text-stroke: 2px #426053;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 75px;
+
+    color: #afe0c8;
+    font-size: 50px;
+    font-family:"Poppins", sans-serif;
+    font-weight: 800;
+}
+
+.book-image{
+    width: 30%; 
+    height: auto;
+}
+
+.book-position{
+    -webkit-text-stroke: 1px #426053;
+    padding-right: 20%; 
+    margin-right: 10%;
+    margin-left: 5%;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: x-large;
+    font-weight: bolder;
+    color:#afe0c8
+}
+
+.book-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: x-large;
+    margin-right: 10%;
+    margin-left: 2%;
+}
+
+.book-author{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: large; 
+    margin-left: 2%;  
+}
+
+.books{
+    width: 500px; 
+    height: 250px; 
+
+    padding-right: 25%;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.no-reviews{
+    font-family: 'Poppins';
+    font-size: small;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

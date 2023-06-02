@@ -8,7 +8,20 @@
         <a class="go-back-button" href="{% url 'books:list_books' %}">Go back</a>
         <h4 class = "review-book">{{ book.title }}</h4>
         <h5 class="book-author">By {{ book.author }}</h5>
-        <h5 class="book-published">Published: {{ book.pub_year }}</h5>        
+        <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
+        {% if request.user.is_authenticated %}
+            {% if book in profile.favorite_books.all %}
+                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit"> Unfavorite </button>
+                </form>
+            {% else %}
+                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit"> Favorite </button>
+                </form>
+            {% endif %}
+        {% endif %}
     </div>
     <div class="right-section">
         <h3 class = "reviews">Reviews</h3>

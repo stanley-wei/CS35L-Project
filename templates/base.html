@@ -11,12 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/book.css' %}">
     {% block css %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+
+    {% block js %}{% endblock %}
+
 </head>
 
 <body>
     {% include "nav.html" %}
     <br>
-    {% block content %} {% endblock %}
+    {% block content %}{% endblock %}
+
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

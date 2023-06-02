@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    'django_extensions',
+
     'books.apps.BooksConfig',
     'reviews.apps.ReviewsConfig',
     'profiles.apps.ProfilesConfig'
