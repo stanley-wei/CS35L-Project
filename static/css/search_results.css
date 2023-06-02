@@ -1,0 +1,73 @@
+.container-fluid{
+    background-color: #e1ebe7;
+}
+
+.sort-search{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: small;
+}
+.search-statement{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: small;
+    font-weight: bold;
+    color:black;
+    text-align:start;
+}
+
+.book-image{
+    width: 10%; 
+    height: auto;
+}
+
+.book-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: medium;
+    margin-right: 10%;
+    margin-left: 2%;
+}
+
+.book-author{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: medium;  
+    margin-left: 2%;
+}
+
+
+.books{
+    width: 700px; 
+    height: 100px; 
+    padding-right: 25%;
+    margin-right: 10%;
+}
+
+.Stars{
+    margin-left: 2%; 
+}
+
+.no-reviews{
+    font-family: 'Poppins';
+    font-size: small;
+    font-weight: bold;
+}
+
+.no-results{
+    font-family:'Poppins';
+    font-size: small;
+    font-weight: bold;   
+}
+
+
+
+
+
+
+
+
+
+
+
+

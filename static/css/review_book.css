@@ -1,0 +1,92 @@
+h1 {
+  padding: 5px;
+  padding-bottom: 18px;
+  font-family: Verdana;
+  text-transform: lowercase;
+  text-align: center;
+  font-weight: normal;
+  font-size: 25px;
+  }
+  
+  h2 {
+    font-family: Verdana;
+    font-size: 15px;
+    text-transform: lowercase;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  h4 {
+    padding:10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    background-color: #F0F0F0; 
+    border-radius: 10px; 
+    max-width: 600px;
+    margin: 0 auto; 
+    margin-top: 30px;
+}
+
+.review {
+  padding-top:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form p {
+  margin-bottom: 5px;
+  font-family: Verdana;
+  font-size: 18px;
+}
+
+.sub-button {
+  display: inline-block;
+  font-family: Verdana;
+  text-transform: lowercase;
+  color: black;
+  background-color: #FDF7E8;
+  margin-top: 5px;
+  margin-left:250px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.custom-select {
+  margin-top:10px;
+  font-size:15px;
+  font-family: Verdana;
+  background-color: #FDF7E8;
+  border:none;
+  border-radius: 5px;
+  padding:4px;
+}
+
+.custom-textarea {
+  margin-top: 10px;
+  max-width: 325px;
+  max-height: 125px;
+  min-width: 100px;
+  min-height: 50px;
+  background-color: #FDF7E8;
+  border:none;
+  border-radius: 10px;
+  padding:5px;
+}
+
+/*fully implement this part later once pictures are fixed */
+.custom-file-input {
+  font-family: Verdana;
+  text-transform: lowercase;
+  cursor: pointer;
+  background-color: #FDF7E8;
+  border-radius: 1px;
+  border-radius: 10px;
+  padding:2px;
+  max-width:200px;
+}
+

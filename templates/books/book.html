@@ -5,6 +5,20 @@
     <p>by {{ book.author }}</p>
     <p>Pub. {{ book.pub_year }}</p>
 
+    {% if request.user.is_authenticated %}
+        {% if book in profile.favorite_books.all %}
+            <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit"> Unfavorite </button>
+            </form>
+        {% else %}
+            <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit"> Favorite </button>
+            </form>
+        {% endif %}
+    {% endif %}
+
     <h3>Reviews</h3>
     {% if not user_review %}
         <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />

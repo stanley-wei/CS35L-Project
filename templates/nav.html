@@ -1,15 +1,4 @@
 <nav>
-    <!-- Dropdown [test]
-    <span class="dropdown">
-        <button class="dropbtn">
-            <a href="{% url 'books:list_books' %}">Books</a>
-        </button>
-        <div class="dropdown-content">
-            <a href="{% url 'books:top_ten' %}">Top-Rated</a>
-          </div>
-    </span>  
-    -->
-
     <span class="menu-items">
         <a href="{% url 'books:list_books' %}">
             <button type="books" class="nav-button">Directory</button>
@@ -43,9 +32,9 @@
         </div>
         
         {% else %}
-        <a href="{% url 'account_signup' %}">
+        <a href="{% url 'users:signup' %}">
             <button type="signup" class="nav-button">Sign Up</button></a>
-        <a href="{% url 'account_login' %}">
+        <a href="{% url 'users:login'%}">
             <button type="login" class="nav-button">Login</button>
         </a>
         {% endif %}
