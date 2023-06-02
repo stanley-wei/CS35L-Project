@@ -1,4 +1,4 @@
-h1 {
+.recent-read {
   padding: 5px;
   padding-bottom: 18px;
   font-family: Verdana;
@@ -8,7 +8,7 @@ h1 {
   font-size: 25px;
   }
   
-h2 {
+.fields-detail {
     font-family: Verdana;
     font-size: 15px;
     text-transform: lowercase;
@@ -16,7 +16,7 @@ h2 {
     font-weight: normal;
   }
 
-h4 {
+.review-book {
     padding:10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;

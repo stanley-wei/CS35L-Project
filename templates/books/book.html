@@ -6,23 +6,23 @@
 <div class="container">
     <div class="left-section">
         <a class="go-back-button" href="{% url 'books:list_books' %}">Go back</a>
-        <h4>{{ book.title }}</h4>
-        <h5>By {{ book.author }}</h5>
-        <h5>Published: {{ book.pub_year }}</h5>
+        <h4 class = "review-book">{{ book.title }}</h4>
+        <h5 class="book-author">By {{ book.author }}</h5>
+        <h5 class="book-published">Published: {{ book.pub_year }}</h5>        
     </div>
     <div class="right-section">
-        <h3>Reviews</h3>
+        <h3 class = "reviews">Reviews</h3>
         {% if not user_review %}
             <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />
             {% if not reviews  %}
             <p>No reviews for this book :</p>
             {% endif %}
         {% else %}
-            <h5>Your Review:</h5>
+            <h5 class ="personal-review">Your Review:</h5>
             <div style="margin-left: 30px;">
                 <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
-                <b>{{ user_review.rating }}/5</b>
-                <h6>{{ user_review.text }}</h6>
+                <b class = "rating">{{ user_review.rating }}/5</b>
+                <h6 class = "user-rev">{{ user_review.text }}</h6>
                 <a href="{% url 'books:edit_review' book.id %}">
                     <button type="edit-rev" class="rev-button">Edit Review</button>
                 </a>
@@ -65,8 +65,8 @@
 
         {% for review in reviews %}
             <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
-            <b>{{ review.rating }}/5</b>
-            <h6>{{ review.text }}</h6>
+            <b class = "rating">{{ review.rating }}/5</b>
+            <h6 class = "user-rev">{{ review.text }}</h6>
 
             <!--Like/Dislike Buttons for Reviews-->
             <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">

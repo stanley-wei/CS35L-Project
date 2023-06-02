@@ -20,13 +20,27 @@ a.go-back-button {
   a.go-back-button:hover {
     background-color: white;
   }
-  
-h5{
+   
+.personal-review{
     font-family: Verdana;
     font-size: 15px;
     text-align: center;
     margin-right:30px;
     font-weight: normal;
+} 
+.book-author{
+    font-family: Verdana;
+    font-size: 15px;
+    text-align: center;
+    margin-right:30px;
+    font-weight: normal;
+}
+.book-published{
+  font-family: Verdana;
+  font-size: 15px;
+  text-align: center;
+  margin-right:30px;
+  font-weight: normal;
 }
 /* Styles for the split layout */
 .container {
@@ -45,7 +59,7 @@ h5{
     overflow: auto; /* Enable scrolling when content overflows */
   }
   
-  h3 {
+  .reviews {
     font-family: Verdana, Arial, sans-serif; /* Specify alternative fallback fonts */
     font-size: 20px;
     margin-top: 80px;
@@ -67,7 +81,7 @@ h5{
     cursor: pointer;
 }
   
-h6{
+.user-rev{
     background-color: #f2f2f2;
     padding: 10px;
     border: 1px solid #ccc;
