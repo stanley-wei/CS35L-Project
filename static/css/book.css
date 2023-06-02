@@ -80,7 +80,12 @@ a.go-back-button {
     text-decoration: none;
     cursor: pointer;
 }
-  
+.rating{
+  font-family:Verdana;
+  font-weight:normal;
+  margin-left: 20px;
+  font-size: 15px;
+}
 .user-rev{
     background-color: #f2f2f2;
     padding: 10px;
@@ -92,7 +97,7 @@ a.go-back-button {
     min-height: 100px;
 }
   
-  div {
+  .container {
     /* Styles for the user's review container */
     margin-left: 15px;
   }
@@ -111,7 +116,6 @@ a.go-back-button {
     max-width:fit-content;
   }
   a.user-profile-button:hover {
-    display:block;
     background-color: #f2f2f2; /* Set the background color on hover */
   }
   form#sort-form {
