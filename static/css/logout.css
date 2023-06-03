@@ -1,0 +1,21 @@
+.log-out{
+    text-align:center;
+    -webkit-text-stroke: 2px #426053;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 75px;
+
+    color: #afe0c8;
+    font-size: 40px;
+    font-family:"Poppins", sans-serif;
+    font-weight: 800;
+}
+.sure{
+    font-family:"Poppins";
+    font-size:20px;
+    text-align:center;
+    font-weight:normal;
+}

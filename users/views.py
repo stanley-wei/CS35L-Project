@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
@@ -28,6 +28,12 @@ def login_user(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/books/list')
+    return render(request, 'registration/logout.html')
 
 class CustomPasswordResetView(PasswordResetView):
     success_url = '/books/list'
