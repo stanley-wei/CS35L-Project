@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2 class = "user-back">Welcome Back {{profile_user.username}} !</h2>
+    <h2 class = "user-back">Welcome Back @{{profile_user.username}} !</h2>
     <p class = "date-userhood">You've been a user since {{profile_user.date_joined.date}}</p>
     {% if profile_user.profile_picture %}
         <img src="{{ profile_user.profile_picture }}" alt="Profile Picture">
