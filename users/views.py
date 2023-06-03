@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -19,14 +20,16 @@ def signup(request):
 
 def login_user(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password')
+            user = form.get_user()
             login(request, user)
             return redirect('/books/list')
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+class CustomPasswordResetView(PasswordResetView):
+    success_url = '/books/list'
+    template_name = 'registration/forget_password.html'
 
