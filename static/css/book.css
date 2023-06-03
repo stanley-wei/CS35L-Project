@@ -186,6 +186,7 @@ button.like-buttons {
   background-color: rgb(128, 203, 228);
   color: #fff;
   cursor: pointer;
+  margin-left: 250px;
 }
 
 button.like-buttons:hover {
