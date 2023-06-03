@@ -13,7 +13,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/books/list')
+            return redirect('/books/home')
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -24,12 +24,12 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/books/list')
+            return redirect('/books/home')
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
 
 class CustomPasswordResetView(PasswordResetView):
-    success_url = '/books/list'
+    success_url = '/books/home'
     template_name = 'registration/forget_password.html'
 
