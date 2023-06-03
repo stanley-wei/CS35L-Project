@@ -32,7 +32,7 @@ def login_user(request):
 def logout_user(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('/books/list')
+        return redirect('/books/home')
     return render(request, 'registration/logout.html')
 
 class CustomPasswordResetView(PasswordResetView):

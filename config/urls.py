@@ -22,7 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', RedirectView.as_view(url="/books/list"), name='home'),
+    path('', RedirectView.as_view(url="/books/home"), name='home'),
     path('accounts/', include('allauth.urls')),
     path("books/", include("books.urls", namespace="books")),
     path("users/", include("users.urls", namespace="users")),
