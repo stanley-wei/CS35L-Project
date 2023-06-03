@@ -13,7 +13,7 @@ def profile(request, user_id):
             'profile_user': profile_user,
             'reviews': reviews
         }
-        return render(request, 'profiles/profile.html', context)
+        return render(request, 'profiles/user-profile.html', context)
     return None
 
 def user_profile(request, user_id):
