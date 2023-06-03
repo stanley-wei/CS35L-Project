@@ -12,6 +12,9 @@ from datetime import datetime
 import re
 from olclient.openlibrary import OpenLibrary
 
+def Home(request):
+    return render(request, 'books/home.html')
+
 def displayBookInfo(request, book_id):
     book = Book.objects.get(pk=book_id)
     reviews = Review.objects.filter(book__id=book_id)
