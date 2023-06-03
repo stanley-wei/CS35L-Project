@@ -1,3 +1,27 @@
-.container-fluid{
-    background-color: #e1ebe7;
+.log-in{
+    text-align:center;
+    -webkit-text-stroke: 2px #426053;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 75px;
+
+    color: #afe0c8;
+    font-size: 40px;
+    font-family:"Poppins", sans-serif;
+    font-weight: 800;
 }
+ /* Styling for the form fields container */
+ .login_form{
+    margin-bottom: 10px;
+    font-size:20px;
+    display:block;
+    margin-left:500px;
+  }
+  .errorlist.nonfield{
+    color: red;
+    font-size: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
