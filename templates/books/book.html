@@ -1,93 +1,102 @@
 {% extends "base.html" %}
 
+<!--h1,h2,h4 have already been used-->
 {% block content %}
-    <h3>{{ book.title }}</h3>
-    <p>by {{ book.author }}</p>
-    <p>Pub. {{ book.pub_year }}</p>
 
-    {% if request.user.is_authenticated %}
-        {% if book in profile.favorite_books.all %}
-            <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit"> Unfavorite </button>
-            </form>
+<div class="container">
+    <div class="left-section">
+        <a class="go-back-button" href="{% url 'books:list_books' %}">Go back</a>
+        <h4 class = "review-book">{{ book.title }}</h4>
+        <h5 class="book-author">By {{ book.author }}</h5>
+        <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
+        {% if request.user.is_authenticated %}
+            {% if book in profile.favorite_books.all %}
+                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit"> Unfavorite </button>
+                </form>
+            {% else %}
+                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit"> Favorite </button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="right-section">
+        <h3 class = "reviews">Reviews</h3>
+        {% if not user_review %}
+            <a class="write-rev-button" href="{% url 'books:review_book' book.id %}">Leave a Review</a>
+            {% if not reviews  %}
+            <p class = "no-rev">No reviews for this book :</p>
+            {% endif %}
         {% else %}
-            <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit"> Favorite </button>
-            </form>
+            <h5 class ="personal-review">Your Review:</h5>
+            <div style="margin-left: 30px;">
+                <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
+                <b class = "rating">{{ user_review.rating }}/5</b>
+                <h6 class = "user-rev">{{ user_review.text }}</h6>
+                <a href="{% url 'books:edit_review' book.id %}">
+                    <button type="edit-rev" class="rev-button">Edit Review</button>
+                </a>
+            </div>
+            <br/>
         {% endif %}
-    {% endif %}
 
-    <h3>Reviews</h3>
-    {% if not user_review %}
-        <a href="{% url 'books:review_book' book.id %}">Write review</a><br /><br />
-        {% if not reviews  %}
-        <p>No reviews for this book :</p>
-        {% endif %}
-    {% else %}
-        <h4>Your review:</h4>
-        <div style = "margin-left:15px;">
-            <b><a href="{% url 'profiles:profile' user.id %}">{{user.username}}</a>: {{ user_review.rating }}/5</b>
-            <p>{{ user_review.text }}</p>
-            <a href="{% url 'books:edit_review' book.id %}">Edit Review</a>
-        </div>
+        <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
+            <label for="sort">Sort reviews by:</label>
+            <select id="sort" name="sort">
+                <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
+                <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
+                <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
+            </select>
+        </form>
         <br/>
-    {% endif %}
 
-    <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
-        <label for="sort">Sort reviews by:</label>
-        <select id="sort" name="sort">
-            <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
-            <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
-            <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
-        </select>
-    </form>
-    <br/>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                // Clears selected filters from previous pages
+                window.addEventListener('load', function() {
+                    localStorage.removeItem('sort_options');
+                });
+                
+                var sortSelect = document.getElementById('sort');
+                var sortOptions = localStorage.getItem('sort_options');
+        
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Clears selected filters from previous pages
-            window.addEventListener('load', function() {
-                localStorage.removeItem('sort_options');
+                if (sortOptions) {
+                    sortSelect.value = sortOptions;
+                }
+        
+                sortSelect.addEventListener('change', function() {
+                    localStorage.setItem('sort_options', this.value);
+                    document.getElementById('sort-form').submit();
+                });
             });
-            
-            var sortSelect = document.getElementById('sort');
-            var sortOptions = localStorage.getItem('sort_options');
-    
+        </script>
 
-            if (sortOptions) {
-                sortSelect.value = sortOptions;
-            }
-    
-            sortSelect.addEventListener('change', function() {
-                localStorage.setItem('sort_options', this.value);
-                document.getElementById('sort-form').submit();
-            });
-        });
-    </script>
+        {% for review in reviews %}
+            <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
+            <b class = "rating">{{ review.rating }}/5</b>
+            <h6 class = "user-rev">{{ review.text }}</h6>
 
-    {% for review in reviews %}
-        <b><a href="{% url 'profiles:profile' review.user.id %}">{{review.user.username}}</a>: {{ review.rating }}/5</b>
-        <p>{{ review.text }}</p>
-
-        <!--Like/Dislike Buttons for Reviews-->
-        <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="review_id" value="{{ review.id }}">
-            <input type="hidden" name="reaction" value="like">
-            <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
-        </form>
-        <form id="dislike_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="review_id" value="{{ review.id }}">
-            <input type="hidden" name="reaction" value="dislike">
-            <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
-        </form>
-    {% endfor %}
-
+            <!--Like/Dislike Buttons for Reviews-->
+            <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="review_id" value="{{ review.id }}">
+                <input type="hidden" name="reaction" value="like">
+                <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
+            </form>
+            <form id="dislike_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="review_id" value="{{ review.id }}">
+                <input type="hidden" name="reaction" value="dislike">
+                <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
+            </form>
+        {% endfor %}
     <br/>
-    <a href="{% url 'books:list_books' %}">Go back</a>
+    </div>
+</div>
 
 {% endblock %}
