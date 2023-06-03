@@ -43,9 +43,9 @@
         </div>
         
         {% else %}
-        <a href="{% url 'users:signup' %}">
+        <a href="{% url 'account_signup' %}">
             <button type="signup" class="nav-button">Sign Up</button></a>
-        <a href="{% url 'users:login'%}">
+        <a href="{% url 'account_login'%}">
             <button type="login" class="nav-button">Login</button>
         </a>
         {% endif %}
