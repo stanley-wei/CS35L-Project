@@ -6,6 +6,8 @@ from .views import SearchBooks
 
 app_name = "books"
 urlpatterns = [
+    path("home/", views.Home, name="home_page"),
+
     path("list/", views.ListBooks, name="list_books"),
     path("list/top_ten", views.TopTen, name="top_ten"),
 
