@@ -20,7 +20,20 @@ a.go-back-button {
   a.go-back-button:hover {
     background-color: white;
   }
-   
+#favorite button{
+  font-family: Verdana;
+  text-transform: lowercase; 
+  color: white;
+  background-color: black;
+
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left:40px;
+}
 .personal-review{
     font-family: Verdana;
     font-size: 15px;

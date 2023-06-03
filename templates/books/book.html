@@ -13,12 +13,12 @@
             {% if book in profile.favorite_books.all %}
                 <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit"> Unfavorite </button>
+                    <button type="fav-submit"> Unfavorite </button>
                 </form>
             {% else %}
                 <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit"> Favorite </button>
+                    <button type="fav-submit"> Favorite </button>
                 </form>
             {% endif %}
         {% endif %}
