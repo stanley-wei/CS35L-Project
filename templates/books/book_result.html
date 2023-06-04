@@ -1,0 +1,23 @@
+<div class="books">
+    <span class="book-title">
+        
+        <p> <img src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="Image of book" style="float:left;"  class="book-image">
+        <br>
+        <a class="book-name" {%if book.id%}href="{% url 'books:view_book' book.id %}"{%endif%} style="font-weight:bold;">{{ book.title }} ({{ book.pub_year }})</a>
+             <br>
+             <span class="book-author">by {{book.author}}</span>
+        </p>
+    </span>
+    </span>
+    <div class="book-info">
+        {% if book.avg_rating != 0.0 %}
+            <p>
+                <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
+                ({{book.avg_rating}} / 5)
+            </p>
+        {% elif book.id %}
+            <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>
+        {% endif %}
+    </div>
+</div>
+<br />

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+{% endblock %}
 
 {% block content %}
     <div style="margin: 20px;">
@@ -11,10 +16,11 @@
             </form>
         </div>
 
-        {% if title %}
+        {% if book %}
             <h3>Result:</h3>
-            {{title}} by {{authors}} ({{pub_year}})
-            <img src="https://covers.openlibrary.org/b/isbn/{{query}}-M.jpg" />
+            <div class="isbn-result">
+                {% include "books/book_result.html" with book=book %}
+            </div>
             <input type="submit" id="isbn-submit"/>
         {% endif %}
     </div>
