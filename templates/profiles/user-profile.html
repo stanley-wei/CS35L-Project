@@ -36,7 +36,10 @@
               <p class="user-rev">{{review.text}}</p>
               <a href="{% url 'books:edit_review' review.book.id %}">
                 <button type="edit-rev" class="edit-rev">Edit Review</button>
-            </a>
+              </a>
+              <a href="{% url 'books:edit_review' review.book.id %}">
+                <button type="delete-rev" class="rev-button delete-button">Delete Review</button>
+              </a>
             </div>
           </div>
           {% endfor %}

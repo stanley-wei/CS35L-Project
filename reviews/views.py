@@ -51,6 +51,13 @@ def EditReview(request, book_id):
     return render(request, "reviews/review_book.html", {"form": form, "book": Book.objects.get(pk=book_id)})
 
 @login_required
+def DeleteReview(request, book_id):
+    Review.objects.filter(user=request.user, book__id=book_id).delete()
+    
+    return HttpResponseRedirect(reverse("books:view_book", args=(book_id,)))
+
+
+@login_required
 def LikeDislike(request, book_id):
     if request.method == "POST":
         review_id= request.POST.get("review_id")

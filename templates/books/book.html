@@ -39,6 +39,9 @@
                 <a href="{% url 'books:edit_review' book.id %}">
                     <button type="edit-rev" class="rev-button">Edit Review</button>
                 </a>
+                <a href="{% url 'books:delete_review' book.id %}">
+                    <button type="delete-rev" class="rev-button delete-button">Delete Review</button>
+                </a>
             </div>
             <br/>
         {% endif %}
