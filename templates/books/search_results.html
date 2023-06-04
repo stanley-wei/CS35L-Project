@@ -20,33 +20,6 @@
                 </div>
             </form>
             <br/>
-        
-            <script>
-                const url = new URL(document.URL);
-                const urlParams = new URLSearchParams(window.location.search);
-                document.addEventListener('DOMContentLoaded', function() {
-                    
-                    // Clears selected filters from previous pages
-                    window.addEventListener('load', function() {
-                        localStorage.removeItem('sort_options');
-                    });
-                    
-                    var sortSelect = document.getElementById('sort-search');
-                    var sortOptions = localStorage.getItem('sort_options');
-            
-        
-                    if (sortOptions) {
-                        sortSelect.value = sortOptions;
-                    }
-            
-                    sortSelect.addEventListener('change', function() {
-                        localStorage.setItem('sort_options', this.value);
-                        url.searchParams.set('sort-search', this.value);
-                        url.searchParams.set('query', urlParams.get('query'));
-                        window.location.href = url;
-                    });
-                });
-            </script>
 
         <h2 class="search-statement">
             {% if results|length == 1 %}
@@ -84,4 +57,33 @@
             <p class="no-results">No results found.</p>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const url = new URL(document.URL);
+    const urlParams = new URLSearchParams(window.location.search);
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Clears selected filters from previous pages
+        window.addEventListener('load', function() {
+            localStorage.removeItem('sort_options');
+        });
+        
+        var sortSelect = document.getElementById('sort-search');
+        var sortOptions = localStorage.getItem('sort_options');
+
+
+        if (sortOptions) {
+            sortSelect.value = sortOptions;
+        }
+
+        sortSelect.addEventListener('change', function() {
+            localStorage.setItem('sort_options', this.value);
+            url.searchParams.set('sort-search', this.value);
+            url.searchParams.set('query', urlParams.get('query'));
+            window.location.href = url;
+        });
+    });
+</script>
 {% endblock %}

@@ -53,29 +53,6 @@
         </form>
         <br/>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                
-                // Clears selected filters from previous pages
-                window.addEventListener('load', function() {
-                    localStorage.removeItem('sort_options');
-                });
-                
-                var sortSelect = document.getElementById('sort');
-                var sortOptions = localStorage.getItem('sort_options');
-        
-
-                if (sortOptions) {
-                    sortSelect.value = sortOptions;
-                }
-        
-                sortSelect.addEventListener('change', function() {
-                    localStorage.setItem('sort_options', this.value);
-                    document.getElementById('sort-form').submit();
-                });
-            });
-        </script>
-
         {% for review in reviews %}
             <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
             <b class = "rating">{{ review.rating }}/5</b>
@@ -99,4 +76,29 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Clears selected filters from previous pages
+        window.addEventListener('load', function() {
+            localStorage.removeItem('sort_options');
+        });
+        
+        var sortSelect = document.getElementById('sort');
+        var sortOptions = localStorage.getItem('sort_options');
+
+
+        if (sortOptions) {
+            sortSelect.value = sortOptions;
+        }
+
+        sortSelect.addEventListener('change', function() {
+            localStorage.setItem('sort_options', this.value);
+            document.getElementById('sort-form').submit();
+        });
+    });
+</script>
 {% endblock %}
