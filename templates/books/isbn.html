@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <span class="isbn-search">
-        <form id="isbn-search"  method="GET" action="{% url 'books:search_isbn' %}">
-            <input type="text" name="isbn" placeholder="Enter ISBN10 here"
-                {% if query %} value="{{query}}" {% endif %} />
-        </form>
-    </span>
+    <div style="margin: 20px;">
+        <h2>Search by ISBN</h2>
+        <p>Enter the ISBN of the book you're looking for, and we'll see if we can find it.</p>
+        <div class="isbn-search search-bar" style="margin-left: 15px;">
+            <form id="isbn-search"  method="GET" action="{% url 'books:search_isbn' %}">
+                <input type="text" name="isbn" placeholder="Enter ISBN10 here"
+                    {% if query %} value="{{query}}" {% endif %} />
+            </form>
+        </div>
 
-    {% if title %}
-        {{title}} by {{authors}} ({{pub_year}})
-        <img src="https://covers.openlibrary.org/b/isbn/{{query}}-M.jpg" />
-        <input type="submit" id="isbn-submit"/>
-    {% endif %}
+        {% if title %}
+            <h3>Result:</h3>
+            {{title}} by {{authors}} ({{pub_year}})
+            <img src="https://covers.openlibrary.org/b/isbn/{{query}}-M.jpg" />
+            <input type="submit" id="isbn-submit"/>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block scripts %}

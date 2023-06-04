@@ -19,7 +19,8 @@
                 </select>
                 </div>
             </form>
-            <br/>
+            <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a>
+            <br/><br/>
 
         <h2 class="search-statement">
             {% if results|length == 1 %}
