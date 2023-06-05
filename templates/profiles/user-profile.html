@@ -16,7 +16,9 @@
     
     <h2 class="header-1">Following:</h2>
     {% for followed_user in profile.followed_users.all %}
-      <p><a class="rand-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
+    <p><a class="rand-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
+    {% empty %}
+    <p>None</p>
     {% endfor %}
 
     <div class="grid-container">
@@ -27,6 +29,14 @@
           {% empty %}
           <p class="my-fav-book">No favorite books.</p>
           {% endfor %}
+          <h2 class="header-1">Followed Users Favorite Reads</h2>
+          {% for book in followed_fav_books %}
+              <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
+          {% empty %}
+              <p class="my-fav-book">No favorite books.</p>
+          {% endfor %}
+
+
         </div>
         <div class="right-s">
           <h2 class="header-2">Your Reviews</h2>
