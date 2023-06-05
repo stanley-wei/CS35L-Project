@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -7,12 +8,26 @@ from reviews.models import Review
 
 def profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
+    signed_in_user = request.user
     if profile_user is not None:
+        try:
+            profile = UserProfile.objects.filter(user=profile_user)[0] 
+        except:
+            profile = UserProfile.objects.create(user=profile_user)
+        
         reviews = Review.objects.filter(user=profile_user)
         context =  {
             'profile_user': profile_user,
-            'reviews': reviews
+            'reviews': reviews,
+            'profile': profile,
+            # 'signed_in_user': signed_in_user
         }
+        if signed_in_user.is_authenticated:
+            try: 
+                signed_in_profile = UserProfile.objects.get(user=signed_in_user)
+            except:
+                signed_in_profile = UserProfile.objects.create(user=signed_in_user)
+            context['signed_in_user'] = signed_in_profile
         return render(request, 'profiles/profile.html', context)
     return None
 
@@ -50,3 +65,18 @@ def upload_profile_picture(request, user_id):
     else:
         form = ProfilePictureForm()
     return render(request, 'profiles/upload-profile-picture.html', {'form': form})
+
+@login_required
+def follow_user(request, user_id):
+    friend_user = User.objects.get(pk=user_id)
+    friend_profile = UserProfile.objects.get(user=friend_user)
+
+    logged_in_user = request.user
+    profile = UserProfile.objects.get(user=logged_in_user) 
+    
+    if friend_profile in profile.followed_users.all():
+        profile.followed_users.remove(friend_profile)
+    else:
+        profile.followed_users.add(friend_profile)
+    profile.save()
+    return redirect("profiles:profile", user_id=user_id)
