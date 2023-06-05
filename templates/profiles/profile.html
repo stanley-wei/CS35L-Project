@@ -8,6 +8,19 @@
 {% block content %}
     <h2>User: {{profile_user.username}}</h2>
     <p>User since {{profile_user.date_joined.date}}</p>
+    {% if request.user.is_authenticated %}
+        {% if profile in signed_in_user.followed_users.all %}
+            <form id="unfollow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
+                {% csrf_token %}
+                <button> Unfollow </button>
+            </form>
+        {% else %}
+            <form id="follow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
+                {% csrf_token %}
+                <button> Follow </button>
+            </form>
+        {% endif %}
+    {% endif %}
     <h2>Reviews:</h2>
     {% for review in reviews %}
         <div class="review-row">

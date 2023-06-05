@@ -13,6 +13,11 @@
         {{ form }}
         <a class = "add-pfp" href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Add a Profile Picture </a>
     </form>
+    
+    <h2 class="header-1">Following:</h2>
+    {% for followed_user in profile.followed_users.all %}
+      <p><a class="rand-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
+    {% endfor %}
 
     <div class="grid-container">
         <div class="left-s">
