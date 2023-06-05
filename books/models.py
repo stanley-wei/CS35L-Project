@@ -7,6 +7,8 @@ class Book(models.Model):
     pub_year = models.IntegerField(default=-1, blank=True)
     isbn = models.CharField(max_length=13, blank=True)
 
+    olid = models.CharField(max_length=11, blank=True)
+
     @property
     def avg_rating(self):
         return decimalize(self.review_set.aggregate(
