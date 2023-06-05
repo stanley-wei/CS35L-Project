@@ -5,23 +5,31 @@
 
 <div class="container">
     <div class="left-section">
-        <a class="go-back-button" href="{% url 'books:list_books' %}">Go back</a>
-        <h4 class = "review-book">{{ book.title }}</h4>
-        <h5 class="book-author">By {{ book.author }}</h5>
-        <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
-        {% if request.user.is_authenticated %}
-            {% if book in profile.favorite_books.all %}
-                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="fav-submit"> Unfavorite </button>
-                </form>
-            {% else %}
-                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="fav-submit"> Favorite </button>
-                </form>
+        <div class = "container-fluid">
+            {% if book.isbn %}
+                <div>
+                    <img src="https://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg" alt="Image of book" style="float:left;"  class="book-image">
+                </div>
             {% endif %}
-        {% endif %}
+            <div class = "book-info container-fluid">
+                <h4 class = "review-book">{{ book.title }}</h4>
+                <h5 class="book-author">By {{ book.author }}</h5>
+                <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
+                {% if request.user.is_authenticated %}
+                    {% if book in profile.favorite_books.all %}
+                        <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="fav-submit"> Unfavorite </button>
+                        </form>
+                    {% else %}
+                        <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="fav-submit"> Favorite </button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
     </div>
     <div class="right-section">
         <h3 class = "reviews">Reviews</h3>
