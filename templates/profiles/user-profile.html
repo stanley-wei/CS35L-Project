@@ -31,11 +31,10 @@
           {% endfor %}
           <h2 class="header-1">Followed Users Favorite Reads</h2>
           {% for book in followed_fav_books %}
-              <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
+            <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
           {% empty %}
-              <p class="my-fav-book">No favorite books.</p>
+            <p class="my-fav-book">No favorite books.</p>
           {% endfor %}
-
 
         </div>
         <div class="right-s">
