@@ -40,10 +40,16 @@ def user_profile(request, user_id):
             profile = UserProfile.objects.create(user=profile_user)
             
         reviews = Review.objects.filter(user=profile_user)
+        followed_fav_books = set()
+        for followed_user in profile.followed_users.all():
+            for book in followed_user.favorite_books.all():
+                if book not in followed_fav_books:
+                    followed_fav_books.add(book)
         context =  {
             'profile_user': profile_user,
             'reviews': reviews,
-            'profile': profile
+            'profile': profile,
+            'followed_fav_books': followed_fav_books,
         }
         return render(request, 'profiles/user-profile.html', context)
     return None
