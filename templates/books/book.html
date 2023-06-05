@@ -36,6 +36,11 @@
                 <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
                 <b class = "rating">{{ user_review.rating }}/5</b>
                 <h6 class = "user-rev">{{ user_review.text }}</h6>
+
+                {% if user_review.images %}
+                <img src="{{ MEDIA_URL }}{{ user_review.images }}" alt="Review Image">
+                {% endif %}
+
                 <a href="{% url 'books:edit_review' book.id %}">
                     <button type="edit-rev" class="rev-button">Edit Review</button>
                 </a>
@@ -60,6 +65,10 @@
             <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
             <b class = "rating">{{ review.rating }}/5</b>
             <h6 class = "user-rev">{{ review.text }}</h6>
+
+            {% if review.images %}
+            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+            {% endif %}
 
             <!--Like/Dislike Buttons for Reviews-->
             <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
