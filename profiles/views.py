@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from reviews.models import Review
+from profiles.models import UserProfile
+from .forms import ProfilePictureForm
 
 def profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
@@ -20,7 +22,6 @@ def profile(request, user_id):
             'profile_user': profile_user,
             'reviews': reviews,
             'profile': profile,
-            # 'signed_in_user': signed_in_user
         }
         if signed_in_user.is_authenticated:
             try: 
@@ -54,17 +55,13 @@ def user_profile(request, user_id):
         return render(request, 'profiles/user-profile.html', context)
     return None
 
-from django import forms
-from profiles.models import UserProfile
-
-class ProfilePictureForm(forms.Form):
-    profile_picture = forms.ImageField()
-
+@login_required
 def upload_profile_picture(request, user_id):
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST, request.FILES)
         if form.is_valid():
-            profile_user = UserProfile.objects.get(pk=user_id)
+            user = User.objects.get(pk=user_id)
+            profile_user = UserProfile.objects.get(user=user) 
             profile_user.profile_picture = form.cleaned_data['profile_picture']
             profile_user.save()
             return HttpResponseRedirect(reverse("profiles:user-profile", args=(user_id,)))  # Redirect to the user's profile page
