@@ -35,7 +35,7 @@
             {% endfor %}
 
         {% else %}
-            <p class="no-results">No results found.</p>
+            <p class="no-results">No results found. <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a></p>
         {% endif %}
     </div>
 {% endblock %}
