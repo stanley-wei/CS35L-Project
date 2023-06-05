@@ -3,10 +3,9 @@
 {% block content %}
     <h2 class = "user-back">Welcome Back @{{profile_user.username}} !</h2>
     <p class = "date-userhood">You've been a user since {{profile_user.date_joined.date}}</p>
-    {% if profile_user.profile_picture %}
-        <img src="{{ profile_user.profile_picture }}" alt="Profile Picture">
+    {% if profile.profile_picture %}
+        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
     {% endif %}
-
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
