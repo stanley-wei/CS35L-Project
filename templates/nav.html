@@ -13,7 +13,11 @@
 
     <span class="search-bar">
         <form id="search-bar"  method="GET" action="{% url 'books:search_books' %}">
-            <input type="text" name="query" placeholder="Search" />
+            <select name="field" id="field">
+                <option value="title" {% if field == 'title'%} selected {% endif %}>Title</option>
+                <option value="author" {% if field == 'author'%} selected {% endif %}>Author</option>
+              </select>
+            <input type="text" name="query" id="search-input" placeholder="Search" {% if query %}value="{{query}}"{% endif %} />
         </form>
     </span>
     
