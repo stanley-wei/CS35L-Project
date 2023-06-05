@@ -7,7 +7,7 @@ from .models import Review
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('book_link', 'user_link', 'rating')
+    list_display = ('book_link', 'user_link', 'rating', 'images')
 
     def book_link(self, review):
         return format_html('<a href="%s">%s</a>' % (reverse("admin:books_book_change", args=(review.book.id,)) , escape(review.book.title)))

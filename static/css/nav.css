@@ -112,9 +112,10 @@ nav {
   }
   
   .search-bar input[type="text"] {
+    margin-top: 0px;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 0px 10px 10px 0px;
     min-width: 500px;
     height: 15px;
     font-size: 16px;
@@ -139,4 +140,12 @@ nav {
   .search-bar input[type="submit"]:hover {
     background-color: #0056b3;
   }
-  
+
+  .search-bar select {
+    text-align: center;
+    height: 33px;
+    padding: 4px 2px 4px 10px;
+    font-size: 12px;
+    border-radius: 10px 0px 0px 10px;
+    border: 1px solid #ccc;
+  }

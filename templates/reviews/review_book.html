@@ -7,7 +7,7 @@
 
   <h4 class = "review-book">Reviewing "{{book.title}}" ({{book.pub_year}})</h4>
   <div class="review">
-    <form method="post">
+    <form class = "rev-b" method="post">
       {% csrf_token %}
       {% for field in form %}
         <p>

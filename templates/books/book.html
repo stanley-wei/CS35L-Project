@@ -5,23 +5,35 @@
 
 <div class="container">
     <div class="left-section">
-        <a class="go-back-button" href="{% url 'books:list_books' %}">Go back</a>
-        <h4 class = "review-book">{{ book.title }}</h4>
-        <h5 class="book-author">By {{ book.author }}</h5>
-        <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
-        {% if request.user.is_authenticated %}
-            {% if book in profile.favorite_books.all %}
-                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="fav-submit"> Unfavorite </button>
-                </form>
-            {% else %}
-                <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="fav-submit"> Favorite </button>
-                </form>
+        <div class = "container-fluid">
+            {% if book.isbn or book.olid %}
+                <div>
+                    {% if book.olid %}
+                        <img src="https://covers.openlibrary.org/b/olid/{{book.olid}}-L.jpg" alt="Image of book" style="float:left;"  class="book-image">
+                    {% elif book.isbn %}
+                        <img src="https://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg" alt="Image of book" style="float:left;"  class="book-image">
+                    {% endif %}
+                </div>
             {% endif %}
-        {% endif %}
+            <div class = "book-info container-fluid">
+                <h4 class = "review-book">{{ book.title }}</h4>
+                <h5 class="book-author">By {{ book.author }}</h5>
+                <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
+                {% if request.user.is_authenticated %}
+                    {% if book in profile.favorite_books.all %}
+                        <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="fav-submit"> Unfavorite </button>
+                        </form>
+                    {% else %}
+                        <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="fav-submit"> Favorite </button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
     </div>
     <div class="right-section">
         <h3 class = "reviews">Reviews</h3>
@@ -36,8 +48,16 @@
                 <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
                 <b class = "rating">{{ user_review.rating }}/5</b>
                 <h6 class = "user-rev">{{ user_review.text }}</h6>
+
+                {% if user_review.images %}
+                <img src="{{ MEDIA_URL }}{{ user_review.images }}" alt="Review Image">
+                {% endif %}
+
                 <a href="{% url 'books:edit_review' book.id %}">
                     <button type="edit-rev" class="rev-button">Edit Review</button>
+                </a>
+                <a href="{% url 'books:delete_review' book.id %}">
+                    <button type="delete-rev" class="rev-button delete-button">Delete Review</button>
                 </a>
             </div>
             <br/>
@@ -53,33 +73,14 @@
         </form>
         <br/>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                
-                // Clears selected filters from previous pages
-                window.addEventListener('load', function() {
-                    localStorage.removeItem('sort_options');
-                });
-                
-                var sortSelect = document.getElementById('sort');
-                var sortOptions = localStorage.getItem('sort_options');
-        
-
-                if (sortOptions) {
-                    sortSelect.value = sortOptions;
-                }
-        
-                sortSelect.addEventListener('change', function() {
-                    localStorage.setItem('sort_options', this.value);
-                    document.getElementById('sort-form').submit();
-                });
-            });
-        </script>
-
         {% for review in reviews %}
             <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
             <b class = "rating">{{ review.rating }}/5</b>
             <h6 class = "user-rev">{{ review.text }}</h6>
+
+            {% if review.images %}
+            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+            {% endif %}
 
             <!--Like/Dislike Buttons for Reviews-->
             <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
@@ -99,4 +100,29 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Clears selected filters from previous pages
+        window.addEventListener('load', function() {
+            localStorage.removeItem('sort_options');
+        });
+        
+        var sortSelect = document.getElementById('sort');
+        var sortOptions = localStorage.getItem('sort_options');
+
+
+        if (sortOptions) {
+            sortSelect.value = sortOptions;
+        }
+
+        sortSelect.addEventListener('change', function() {
+            localStorage.setItem('sort_options', this.value);
+            document.getElementById('sort-form').submit();
+        });
+    });
+</script>
 {% endblock %}

@@ -1,29 +1,41 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+{% endblock %}
 
 {% block content %}
-    <span class="isbn-search">
-        <form id="isbn-search"  method="GET" action="{% url 'books:search_isbn' %}">
-            <input type="text" name="isbn" placeholder="Enter ISBN10 here"
-                {% if query %} value="{{query}}" {% endif %} />
-        </form>
-    </span>
+    <div style="margin: 20px;" class="container-fluid">
+        <h2>Search by ISBN</h2>
+        <p>Enter the ISBN of the book you're looking for, and we'll see if we can find it.</p>
+        <div class="isbn-search search-bar" style="margin-left: 15px;">
+            <form id="isbn-search"  method="GET" action="{% url 'books:search_isbn' %}">
+                <input type="text" name="isbn" placeholder="Enter ISBN10 here"
+                    {% if query_isbn %} value="{{query_isbn}}" {% endif %} />
+            </form>
+        </div>
 
-    {% if title %}
-        {{title}} by {{authors}} ({{pub_year}})
-        <img src="https://covers.openlibrary.org/b/isbn/{{query}}-M.jpg" />
-        <input type="submit" id="isbn-submit"" onclick=/>
-    {% endif %}
+        {% if book %}
+            <h3>Result:</h3>
+            <div class="isbn-result">
+                {% include "books/book_result.html" with book=book %}
+            </div>
+        {% elif query_isbn %}
+            <br/><br/>
+            <div class="no-results">No results found.</div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("isbn-submit").addEventListener("click", function() {
-                url = "{% url 'books:create_from_isbn' %}"
-                url += "?isbn={{query}}"
-                window.location.href = url;
-            })        
+            {% if not book.id %}
+                document.getElementById("book-result").href = "{% url 'books:create_from_isbn' %}" + "?isbn={{query_isbn}}";
+            {% endif %}
         });
+
 
     </script>
 {% endblock %}

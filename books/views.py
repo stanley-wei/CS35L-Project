@@ -62,10 +62,16 @@ def SearchBooks(request):
     form = BookSearchForm(request.GET)
     results = []
     query = None;
+    field = None;
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        results = Book.objects.filter(Q(title__icontains=query)|Q(author__icontains=query))
+        field = request.GET.get('field', 'title')
+
+        if field == 'author':
+            results = Book.objects.filter(Q(author__icontains=query))
+        else:
+            results = Book.objects.filter(Q(title__icontains=query))
 
         sort_options = request.GET.get('sort-search')
         if sort_options == 'alphabetical':
@@ -75,7 +81,7 @@ def SearchBooks(request):
         elif sort_options == 'lowest-rated':
             results = sorted(results, key=lambda book: book.avg_rating)
 
-    return render(request, 'books/search_results.html', {'form': form, 'results': results, 'query':query})
+    return render(request, 'books/search_results.html', {'form': form, 'results': results, 'query':query, 'field': field})
 
 @login_required
 def FavoriteBook(request, book_id):
@@ -99,44 +105,49 @@ def SearchIsbn(request):
     form = IsbnSearchForm(request.GET)
     query = None;
 
-    title = None;
-    authors = None;
-    pub_year = None;
+    book = None;
 
     if form.is_valid():
         query = form.cleaned_data['isbn']
-        ol = OpenLibrary()
+        try:
+            book = Book.objects.filter(isbn=query)[0]
+        except:
+            ol = OpenLibrary()
 
-        edition = ol.Edition.get(isbn=query)
-        if(edition):
-            title = edition.title;
-            authors = ', '.join(author_obj.name for author_obj in edition.authors)
-            t = re.search('\d{% s}'% 4, edition.publish_date)
-            pub_year = (int(t.group(0)) if t else None)
+            edition = ol.Edition.get(isbn=query)
+            if(edition):
+                book = Book()
+                book.title = edition.title;
+                book.author = ', '.join(author_obj.name for author_obj in edition.authors)
+                t = re.search('\d{% s}'% 4, edition.publish_date)
+                book.pub_year = (int(t.group(0)) if t else None)
+                book.olid = edition.olid
 
     context = {
         'form': form,
-        'query': query,
+        'query_isbn': query,
 
-        'title': title,
-        'authors': authors,
-        'pub_year': pub_year,
+        'book': book
     }
 
     return render(request, 'books/isbn.html', context)
 
 def CreateFromIsbn(request):
     isbn = request.GET.get('isbn', "")
-    ol = OpenLibrary()
-    edition = ol.Edition.get(isbn=isbn)
+    try:
+        book_obj = Book.objects.filter(isbn=isbn)[0]
+    except:
+        ol = OpenLibrary()
+        edition = ol.Edition.get(isbn=isbn)
 
-    t = re.search('\d{% s}'% 4, edition.publish_date)
-    pub_year = (int(t.group(0)) if t else None)
+        t = re.search('\d{% s}'% 4, edition.publish_date)
+        pub_year = (int(t.group(0)) if t else None)
 
-    book_obj = Book(title = edition.title, 
-                     author = ', '.join(author_obj.name for author_obj in edition.authors),
-                     isbn=isbn,
-                     pub_year = pub_year)
-    book_obj.save()
+        book_obj = Book(title = edition.title, 
+                        author = ', '.join(author_obj.name for author_obj in edition.authors),
+                        isbn=isbn,
+                        pub_year = pub_year,
+                        olid=edition.olid)
+        book_obj.save()
 
-    return displayBookInfo(request, book_obj.id)
+    return redirect("books:view_book", book_id=book_obj.id)

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2 class = "user-back">{{profile_user.username}}'s Page</h2>
+    <p class = "date-userhood">{{profile_user.username}} has been a user since {{profile_user.date_joined.date}}</p>
+    {% if request.user.is_authenticated %}
+        {% if profile in signed_in_user.followed_users.all %}
+            <form id="unfollow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
+                {% csrf_token %}
+                <button> Unfollow </button>
+            </form>
+        {% else %}
+            <form id="follow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
+                {% csrf_token %}
+                <button> Follow </button>
+            </form>
+        {% endif %}
+    {% endif %}
+    {% if profile.profile_picture %}
+        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
+    {% endif %}
+    
+    <div class="grid-container">
+        <div class="left-s">
+        <h2 class="header-1">{{profile_user.username}}'s Favorite Reads:</h2>
+            {% for book in profile.favorite_books.all %}
+                <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
+            {% empty %}
+                <p class="my-fav-book">No favorite books.</p>
+            {% endfor %}
+        </div>
+        <div class="right-s">
+        <h2 class="header-2">{{profile_user.username}}'s Reviews:</h2>
+        {% for review in reviews %}
+            <div class="review-row">
+                <div class="review-books">
+                    <b>Review for: 
+                        <a class="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
+                    </b>
+                </div>
+                <div class="review-contents">
+                    <p class="rating-prof">Rating: {{review.rating}}</p>
+                    <p class="rating-prof">Review:</p>
+                    <p class="user-rev">{{review.text}}</p>
+                    {% if review.images %}
+                    <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

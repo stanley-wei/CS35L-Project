@@ -14,6 +14,10 @@ Professor: Paul Eggert
     <ul>
       <li>Optional: Create a virtual environment before installing.</li>
     </ul>
-  <li>Setup: <code>python manage.py migrate</code>
+  <li>Setup: 
+    <ul>
+      <li><code>python manage.py makemigrations</code></li>
+      <li><code>python manage.py migrate</code></li>
+    </ul>
 </ol>
 Run <code>python manage.py runserver</code> to start a development server on your local machine (default: <code>127.0.0.1:8000</code>).

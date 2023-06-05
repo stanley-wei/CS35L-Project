@@ -19,34 +19,8 @@
                 </select>
                 </div>
             </form>
-            <br/>
-        
-            <script>
-                const url = new URL(document.URL);
-                const urlParams = new URLSearchParams(window.location.search);
-                document.addEventListener('DOMContentLoaded', function() {
-                    
-                    // Clears selected filters from previous pages
-                    window.addEventListener('load', function() {
-                        localStorage.removeItem('sort_options');
-                    });
-                    
-                    var sortSelect = document.getElementById('sort-search');
-                    var sortOptions = localStorage.getItem('sort_options');
-            
-        
-                    if (sortOptions) {
-                        sortSelect.value = sortOptions;
-                    }
-            
-                    sortSelect.addEventListener('change', function() {
-                        localStorage.setItem('sort_options', this.value);
-                        url.searchParams.set('sort-search', this.value);
-                        url.searchParams.set('query', urlParams.get('query'));
-                        window.location.href = url;
-                    });
-                });
-            </script>
+            <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a>
+            <br/><br/>
 
         <h2 class="search-statement">
             {% if results|length == 1 %}
@@ -55,33 +29,42 @@
                 Showing {{ results|length }} results for "{{request.GET.query}}":
             {% endif %}
         </h2>
-                {% for book in results %}
-                    <div class="books">
-                        <span class="book-title">
-                            
-                            <p> <img src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="Image of book" style="float:left;"  class="book-image">
-                            <br>
-                            <a class="book-name" href="{% url 'books:view_book' book.id %}" style="font-weight:bold;">{{ book.title }} ({{ book.pub_year }})</a>
-                                 <br>
-                                 <span class="book-author">by {{book.author}}</span>
-                            </p>
-                        </span>
-                        </span>
-                        <div class="book-info">
-                            {% if book.avg_rating != 0.0 %}
-                                <p>
-                                    <div class="Stars" style="--rating: {{book.avg_rating}};" aria-label="Rating of this product is {{book.avg_rating}} out of 5."></div>
-                                    ({{book.avg_rating}} / 5)
-                                </p>
-                            {% else %}
-                                <p class="no-reviews" style="color:gray;font-style:italic;">No reviews for this book.</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <br />
-                {% endfor %}
+
+            {% for book in results %}
+                {% include 'books/book_result.html' with book=book %}
+            {% endfor %}
+
         {% else %}
-            <p class="no-results">No results found.</p>
+            <p class="no-results">No results found. <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a></p>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const url = new URL(document.URL);
+    const urlParams = new URLSearchParams(window.location.search);
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Clears selected filters from previous pages
+        window.addEventListener('load', function() {
+            localStorage.removeItem('sort_options');
+        });
+        
+        var sortSelect = document.getElementById('sort-search');
+        var sortOptions = localStorage.getItem('sort_options');
+
+
+        if (sortOptions) {
+            sortSelect.value = sortOptions;
+        }
+
+        sortSelect.addEventListener('change', function() {
+            localStorage.setItem('sort_options', this.value);
+            url.searchParams.set('sort-search', this.value);
+            url.searchParams.set('query', urlParams.get('query'));
+            window.location.href = url;
+        });
+    });
+</script>
 {% endblock %}

@@ -193,4 +193,10 @@ button.like-buttons:hover {
   background-color: #386fa9;
 }
 
-  
+.delete-button {
+  background-color:rgb(253, 161, 175);
+}
+
+.book_info {
+  margin: auto;
+}
