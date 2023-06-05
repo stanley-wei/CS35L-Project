@@ -47,6 +47,9 @@
                     <p class="rating-prof">Rating: {{review.rating}}</p>
                     <p class="rating-prof">Review:</p>
                     <p class="user-rev">{{review.text}}</p>
+                    {% if review.images %}
+                    <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
