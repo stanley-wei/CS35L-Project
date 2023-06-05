@@ -109,19 +109,22 @@ def SearchIsbn(request):
 
     if form.is_valid():
         query = form.cleaned_data['isbn']
-        ol = OpenLibrary()
+        try:
+            book = Book.objects.filter(isbn=query)[0]
+        except:
+            ol = OpenLibrary()
 
-        edition = ol.Edition.get(isbn=query)
-        if(edition):
-            book = Book()
-            book.title = edition.title;
-            book.author = ', '.join(author_obj.name for author_obj in edition.authors)
-            t = re.search('\d{% s}'% 4, edition.publish_date)
-            book.pub_year = (int(t.group(0)) if t else None)
+            edition = ol.Edition.get(isbn=query)
+            if(edition):
+                book = Book()
+                book.title = edition.title;
+                book.author = ', '.join(author_obj.name for author_obj in edition.authors)
+                t = re.search('\d{% s}'% 4, edition.publish_date)
+                book.pub_year = (int(t.group(0)) if t else None)
 
     context = {
         'form': form,
-        'query': query,
+        'query_isbn': query,
 
         'book': book
     }
