@@ -62,10 +62,11 @@
               <p class="rating-prof">Your Review:</p>
               <p class="user-rev">{{review.text}}</p>
               
+              <div>
               {% if review.images %}
-              <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+              <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
               {% endif %}
-              
+              </div>
               <a href="{% url 'books:edit_review' review.book.id %}">
                 <button type="edit-rev" class="edit-rev">Edit Review</button>
               </a>

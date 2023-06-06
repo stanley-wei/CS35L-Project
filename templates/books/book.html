@@ -49,9 +49,11 @@
                 <b class = "rating">{{ user_review.rating }}/5</b>
                 <h6 class = "user-rev">{{ user_review.text }}</h6>
 
+                <div>
                 {% if user_review.images %}
-                <img src="{{ MEDIA_URL }}{{ user_review.images }}" alt="Review Image">
+                <img src="{{ MEDIA_URL }}{{ user_review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
                 {% endif %}
+                </div>
 
                 <a href="{% url 'books:edit_review' book.id %}">
                     <button type="edit-rev" class="rev-button">Edit Review</button>
@@ -79,7 +81,7 @@
             <h6 class = "user-rev">{{ review.text }}</h6>
 
             {% if review.images %}
-            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image">
+            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
             {% endif %}
 
             <!--Like/Dislike Buttons for Reviews-->
