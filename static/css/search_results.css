@@ -1,5 +1,7 @@
 .container-fluid{
     background-color: #e1ebe7;
+    padding-left: 2%;
+    padding-top:2%;
 }
 
 .sort-search{
@@ -23,18 +25,25 @@
 
 .book-name {
     font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-size: medium;
-    margin-right: 10%;
     margin-left: 2%;
+    text-decoration: none;
+    padding: 2px 5px;
+    background-color: white; /* Set the background color */
+    color: black; /* Set the text color */
+    text-decoration: none;
+    border-radius: 4px; /* Add some border radius for rounded corners */
+    font-weight:normal;
+    font-size: medium;
 }
 
 .book-author{
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: medium;  
-    margin-left: 2%;
+    font-weight: normal;
+    font-size: normal;  
+    margin-left: 3%;
 }
+
+.container-fluid
 
 
 .books{
