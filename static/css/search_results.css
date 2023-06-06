@@ -60,7 +60,9 @@
 .no-reviews{
     font-family: 'Poppins';
     font-size: small;
+    color: grey;
     font-weight: bold;
+    margin-left:2%;
 }
 
 .no-results{
