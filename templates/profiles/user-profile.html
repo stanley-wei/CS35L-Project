@@ -3,29 +3,36 @@
 {% block content %}
     <h2 class = "user-back">Welcome Back @{{profile_user.username}} !</h2>
     <p class = "date-userhood">You've been a user since {{profile_user.date_joined.date}}</p>
-    {% if profile.profile_picture %}
-        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
-    {% endif %}
+    <p class = "profile-things">
+      {% if profile.profile_picture %}
+        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture" style="width: 10%; height: 100%; margin-left: 45%;">
+      {% endif %}
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <a class = "add-pfp" href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Add a Profile Picture </a>
-    </form>
+      <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form }}
+          <a class = "add-pfp" href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Add a Profile Picture </a>
+      </form>
+    </p>
     
-    <h2 class="header-1">Following:</h2>
-    {% for followed_user in profile.followed_users.all %}
-    <p><a class="rand-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
-    {% empty %}
-    <p>None</p>
-    {% endfor %}
-
-    <h2 class="header-1">Followers:</h2>
-    {% for follower in profile.follower_users.all %}
-    <p><a class="rand-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
-    {% empty %}
-    <p>None</p>
-    {% endfor %}
+    <div class="ff-cont">
+      <div class="lsection">
+        <h2 class="header-1">Following:</h2>
+        {% for followed_user in profile.followed_users.all %}
+          <p><a class="user-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
+        {% empty %}
+          <p>None</p>
+        {% endfor %}
+      </div>
+      <div class="rsection">
+        <h2 class="header-1">Followers:</h2>
+        {% for follower in profile.follower_users.all %}
+          <p><a class="user-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
+        {% empty %}
+          <p>None</p>
+        {% endfor %}
+      </div>
+    </div>
 
     <div class="grid-container">
         <div class="left-s">
