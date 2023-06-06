@@ -17,10 +17,10 @@
                     
                     <p> <img src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="Image of book" style="float:left;"  class="book-image">
                     <br>
-                    <a class="book-name" href="{% url 'books:view_book' book.id %}" style="font-weight:bold;">{{ book.title }} ({{ book.pub_year }})</a>
+                    <a class="book-name" href="{% url 'books:view_book' book.id %}">{{ book.title }} ({{ book.pub_year }})</a>
                          <br>
-                         <span class="book-author">by {{book.author}}</span>
                     </p>
+                    <span class="book-author-name">by {{book.author}}</span>
                 </span>
                 <div class="book-info">
                     {% if book.avg_rating != 0.0 %}
