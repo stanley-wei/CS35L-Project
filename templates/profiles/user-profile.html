@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <div class="content-section">
     <h2 class = "user-back">Welcome Back @{{profile_user.username}} !</h2>
     <p class = "date-userhood">Joined {{profile_user.date_joined.date}}</p>
     <p class = "profile-things">
@@ -16,28 +17,32 @@
           <a class = "add-pfp" href="{% url 'profiles:upload_profile_picture' profile_user.id %}">Add a Profile Picture </a>
       </form>
     </p>
-    
-    <div class="ff-cont">
-      <div class="lsection">
-        <h2 class="header-1">Following:</h2>
-        {% for followed_user in profile.followed_users.all %}
-          <p><a class="user-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
-        {% empty %}
-          <p>None</p>
-        {% endfor %}
-      </div>
-      <div class="rsection">
-        <h2 class="header-1">Followers:</h2>
-        {% for follower in profile.follower_users.all %}
-          <p><a class="user-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
-        {% empty %}
-          <p>None</p>
-        {% endfor %}
-      </div>
-    </div>
-
+  </div>
+  <div></div>
     <div class="grid-container">
         <div class="left-s">
+          <div class="ff-cont">
+            <div class="lsection">
+              <h2 class="header-1">Following:</h2>
+              <div class="lsection-text">
+              {% for followed_user in profile.followed_users.all %}
+                <p><a class="user-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
+              {% empty %}
+                <p>None</p>
+              {% endfor %}
+              </div>
+            </div>
+            <div class="rsection">
+              <h2 class="header-1">Followers:</h2>
+              <div class="rsection-text">
+              {% for follower in profile.follower_users.all %}
+                <p><a class="user-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
+              {% empty %}
+                <p>None</p>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
           <h2 class="header-1">Your Favorite Reads</h2>
           {% for book in profile.favorite_books.all %}
           <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
@@ -54,6 +59,7 @@
         </div>
         <div class="right-s">
           <h2 class="header-2">Your Reviews</h2>
+          <div class="review-block">
           {% for review in reviews %}
           <div class="review-row">
             <div class="review-books">
@@ -78,31 +84,8 @@
             </div>
           </div>
           {% endfor %}
+          </div>
         </div>
       </div>
-      
-    <!-- <h2 class = "headers">Your Favorite Reads</h2>
-    {% for book in profile.favorite_books.all %}
-        <p class = "my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
-    {% empty %}
-        <p class = "my-fav-book">No favorite books.</p>
-    {% endfor %}
-
-
-    <h2 class = "headers">Your Reviews</h2>
-    {% for review in reviews %}
-        <div class="review-row">
-            <div class="review-books">
-                <b class = "rev-for">Review for: 
-                    <a class ="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
-                </b>
-            </div>
-            <div class="review-contents">
-                <p class = "rating-prof">Your Rating: {{review.rating}}</p>
-                <p class = "rating-prof">Your Review:</p>
-                <p class = "user-rev">{{review.text}}</p>
-                <a href="{% url 'books:edit_review' review.book.id %}">Edit Review</a>
-            </div>
-        </div>
-    {% endfor %} -->
+  
 {% endblock %}
