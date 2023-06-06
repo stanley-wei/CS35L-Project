@@ -12,17 +12,17 @@
         {% if profile in signed_in_user.followed_users.all %}
             <form id="unfollow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
                 {% csrf_token %}
-                <button> Unfollow </button>
+                <button class="follow-button"> Unfollow </button>
             </form>
         {% else %}
             <form id="follow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
                 {% csrf_token %}
-                <button> Follow </button>
+                <button class="follow-button">Follow</button>
             </form>
         {% endif %}
     {% endif %}
     {% if profile.profile_picture %}
-        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
+        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture" style="width: 10%; height: 100%; margin-left: 45%;">
     {% endif %}
     
     <div class="grid-container">
