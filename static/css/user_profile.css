@@ -1,3 +1,7 @@
+.content-section {
+  background-color: #e1ebe7;
+  padding-bottom: 1vh;
+}
 .user-back{
     text-align:center;
     -webkit-text-stroke: 2px #426053;
@@ -7,9 +11,9 @@
     font-weight: 400;
     font-size: 50px;
     line-height: 75px;
-    margin-bottom: 0px;
+    margin: 0px;
 
-    color: #e1ebe7;
+    color: #afe0c8;
     font-size: 40px;
     font-family:"Poppins", sans-serif;
     font-weight: 800;
@@ -32,7 +36,7 @@
   object-fit: cover;
 }
 .my-fav-book{
-    margin-left:10px;
+    margin-left:20px;
     padding: 5px 10px;
     background-color: white; /* Set the background color */
     color: black; /* Set the text color */
@@ -61,7 +65,7 @@
   max-width:fit-content;
   display: flex;
   justify-content: center;
-  margin-left:40px;
+  margin-left: 20px;
 }
 .rand-title{
     padding: 5px 10px;
@@ -106,41 +110,61 @@ form {
     max-width:fit-content;
     display: block;
     margin: 0 auto;
-    margin-top:1em;
+    margin-top:2vh;
   }
 
   .grid-container {
-    padding-top: 30px;
+    padding-top: 1vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 5px;
+    background-color: #e1ebe7;
   }
   .left-s {
     flex: 1;
     margin-right: 20px;
-    background-color: rgb(253, 230, 234);
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #c6dfd6;
   }
   .right-s {
     flex: 1;
-    height: 85vh; /* Set a fixed height for the right section */
+    height: 85vh;
+    background-color: #c6dfd6;
+    padding-left: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px
+  }
+  .review-block {
+    height: 70vh; /* Set a fixed height for the right section */
     overflow: auto; /* Enable scrolling when content overflows */
+    position: relative;
   }
 
   .ff-cont {
-    padding-top: 20px;
+    padding-top: 0px;
+    padding-bottom: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    height: 25vh;
   }
   .lsection {
     flex: 1;
-    margin-left: 75%;
-    height: 40vh; /* Set a fixed height for the right section */
+    height: 25vh; /* Set a fixed height for the right section */
+  }
+  .lsection-text {
+    height: 18vh; /* Set a fixed height for the right section */
     overflow: auto; /* Enable scrolling when content overflows */
   }
   .rsection {
     flex: 1;
-    height: 40vh; /* Set a fixed height for the right section */
+    height: 25vh; /* Set a fixed height for the right section */
+  }
+  .rsection-text {
+    height: 18vh; /* Set a fixed height for the right section */
     overflow: auto; /* Enable scrolling when content overflows */
   }
 
@@ -152,11 +176,12 @@ form {
     padding:10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 25px;
-    background-color: #e6e6f5; 
+    background-color: #F0F0F0; 
     border-radius: 10px; 
     max-width: fit-content;
     margin-top: 30px;
-    margin-left:10px;
+    margin-bottom: 5px;
+    margin-left:20px;
 }
 .header-2{
     padding:10px;

@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+    <div class="content-section">
     <h2 class = "user-back">{{profile_user.username}}'s Page</h2>
     <p class = "date-userhood">Joined {{profile_user.date_joined.date}}</p>
     {% if profile.profile_picture %}
@@ -26,6 +27,7 @@
             </form>
         {% endif %}
     {% endif %}
+    </div>
     
     <div class="grid-container">
         <div class="left-s">
@@ -38,23 +40,25 @@
         </div>
         <div class="right-s">
         <h2 class="header-2">{{profile_user.username}}'s Reviews:</h2>
-        {% for review in reviews %}
-            <div class="review-row">
-                <div class="review-books">
-                    <b>Review for: 
-                        <a class="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
-                    </b>
+            <div class="review-block">
+            {% for review in reviews %}
+                <div class="review-row">
+                    <div class="review-books">
+                        <b>Review for: 
+                            <a class="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
+                        </b>
+                    </div>
+                    <div class="review-contents">
+                        <p class="rating-prof">Rating: {{review.rating}}</p>
+                        <p class="rating-prof">Review:</p>
+                        <p class="user-rev">{{review.text}}</p>
+                        {% if review.images %}
+                        <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="review-contents">
-                    <p class="rating-prof">Rating: {{review.rating}}</p>
-                    <p class="rating-prof">Review:</p>
-                    <p class="user-rev">{{review.text}}</p>
-                    {% if review.images %}
-                    <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
-                    {% endif %}
-                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
         </div>
     </div>
 {% endblock %}
