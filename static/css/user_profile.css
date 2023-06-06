@@ -5,10 +5,10 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 50px;
     line-height: 75px;
 
-    color: #afe0c8;
+    color: #e1ebe7;
     font-size: 40px;
     font-family:"Poppins", sans-serif;
     font-weight: 800;
@@ -18,6 +18,7 @@
     text-align: center;
 }
 .my-fav-book{
+    margin-left:10px;
     padding: 5px 10px;
     background-color: white; /* Set the background color */
     color: black; /* Set the text color */
