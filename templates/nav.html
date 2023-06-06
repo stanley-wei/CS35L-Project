@@ -1,13 +1,13 @@
 <nav>
     <span class="menu-items">
+        <a href="{% url 'books:home_page' %}">
+            <button type="home" class="nav-button">Home</button>
+        </a>
         <a href="{% url 'books:list_books' %}">
             <button type="books" class="nav-button">Directory</button>
         </a>
         <a href="{% url 'books:top_ten' %}">
             <button type="rating" class="nav-button">Top-Rated</button>
-        </a>
-        <a href="{% url 'books:home_page' %}">
-            <button type="home" class="nav-button">Home</button>
         </a>
     </span>
 
