@@ -2,11 +2,13 @@
 
 {% block content %}
     <h2 class = "user-back">Welcome Back @{{profile_user.username}} !</h2>
-    <p class = "date-userhood">You've been a user since {{profile_user.date_joined.date}}</p>
+    <p class = "date-userhood">Joined {{profile_user.date_joined.date}}</p>
     <p class = "profile-things">
-      {% if profile.profile_picture %}
-        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture" style="width: 10%; height: 100%; margin-left: 45%;">
-      {% endif %}
+        {% if profile.profile_picture %}
+        <div class = "square">
+            <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
+        </div>
+        {% endif %}
 
       <form method="post" enctype="multipart/form-data">
           {% csrf_token %}

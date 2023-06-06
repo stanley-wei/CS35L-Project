@@ -7,7 +7,12 @@
 
 {% block content %}
     <h2 class = "user-back">{{profile_user.username}}'s Page</h2>
-    <p class = "date-userhood">{{profile_user.username}} has been a user since {{profile_user.date_joined.date}}</p>
+    <p class = "date-userhood">Joined {{profile_user.date_joined.date}}</p>
+    {% if profile.profile_picture %}
+    <div class = "square">
+        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
+    </div>
+        {% endif %}
     {% if request.user.is_authenticated %}
         {% if profile in signed_in_user.followed_users.all %}
             <form id="unfollow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
@@ -20,9 +25,6 @@
                 <button class="follow-button">Follow</button>
             </form>
         {% endif %}
-    {% endif %}
-    {% if profile.profile_picture %}
-        <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture" style="width: 10%; height: 100%; margin-left: 45%;">
     {% endif %}
     
     <div class="grid-container">
