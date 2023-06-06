@@ -7,6 +7,7 @@
     font-weight: 400;
     font-size: 50px;
     line-height: 75px;
+    margin-bottom: 0px;
 
     color: #e1ebe7;
     font-size: 40px;
@@ -16,6 +17,7 @@
 .date-userhood{
     font-family:"Poppins", sans-serif;
     text-align: center;
+    margin-top: 0px
 }
 .my-fav-book{
     margin-left:10px;
