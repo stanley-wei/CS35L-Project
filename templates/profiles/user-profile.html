@@ -20,6 +20,13 @@
     <p>None</p>
     {% endfor %}
 
+    <h2 class="header-1">Followers:</h2>
+    {% for follower in profile.follower_users.all %}
+    <p><a class="rand-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
+    {% empty %}
+    <p>None</p>
+    {% endfor %}
+
     <div class="grid-container">
         <div class="left-s">
           <h2 class="header-1">Your Favorite Reads</h2>
