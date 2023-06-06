@@ -85,19 +85,21 @@
             {% endif %}
 
             <!--Like/Dislike Buttons for Reviews-->
-            <form id="like_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+            <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
                 {% csrf_token %}
                 <input type="hidden" name="review_id" value="{{ review.id }}">
                 <input type="hidden" name="reaction" value="like">
                 <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
             </form>
-            <form id="dislike_review" action="{% url 'books:like_dislike' book.id %}" method="POST">
+            <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
                 {% csrf_token %}
                 <input type="hidden" name="review_id" value="{{ review.id }}">
                 <input type="hidden" name="reaction" value="dislike">
                 <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
-            </form>
+            </form>        
         {% endfor %}
+
+        <div class="empty-div"></div>
     <br/>
     </div>
 </div>
@@ -107,6 +109,19 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        var pjax = new Pjax({
+            selectors: [".like-form", ".dislike-form", ".empty-div"],
+            switches: {
+                ".like-form": Pjax.switches.outerHTML,
+                ".dislike-form": Pjax.switches.outerHTML,
+                ".empty-div": function(oldEl, newEl, options) {
+                    oldEl.outerHTML = newEl.outerHTML
+                    pjax.refresh()
+                    this.onSwitch()
+                },
+            }
+        })
         
         // Clears selected filters from previous pages
         window.addEventListener('load', function() {
@@ -126,5 +141,6 @@
             document.getElementById('sort-form').submit();
         });
     });
+
 </script>
 {% endblock %}
