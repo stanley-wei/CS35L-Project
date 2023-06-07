@@ -8,7 +8,7 @@
 {% block content %}
     <div class="container-fluid">
         {% if results %}
-            <form id="sort-search-form" method="GET" action="{% url 'books:search_books' %}">
+            <form id="sort-search-form" class="sort-search-form" method="GET" action="{% url 'books:search_books' %}">
                 <div class= "sort-search">
                 <label for="sort-search">Sort results by:</label>
                 <select id="sort-search" name="sort-search">
@@ -30,9 +30,11 @@
             {% endif %}
         </h2>
 
+        <div class="search-results">
             {% for book in results %}
                 {% include 'books/book_result.html' with book=book %}
             {% endfor %}
+        </div>
 
         {% else %}
             <p class="no-results">No results found. <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a></p>
@@ -45,7 +47,18 @@
     const url = new URL(document.URL);
     const urlParams = new URLSearchParams(window.location.search);
     document.addEventListener('DOMContentLoaded', function() {
-        
+        var pjax = new Pjax({
+            selectors: [".search-results", ".empty-div"],
+            switches: {
+                ".search-results": Pjax.switches.outerHTML,
+                ".empty-div": function(oldEl, newEl, options) {
+                    oldEl.outerHTML = newEl.outerHTML
+                    pjax.refresh()
+                    this.onSwitch()
+                },
+            }
+        })
+
         // Clears selected filters from previous pages
         window.addEventListener('load', function() {
             localStorage.removeItem('sort_options');
@@ -63,7 +76,8 @@
             localStorage.setItem('sort_options', this.value);
             url.searchParams.set('sort-search', this.value);
             url.searchParams.set('query', urlParams.get('query'));
-            window.location.href = url;
+            pjax.loadUrl(url.toString())
+            // window.location.href = url;
         });
     });
 </script>
