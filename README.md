@@ -1,5 +1,6 @@
 # Novel Insights 
 
+![Logo](/media/logo/HomePage.png)
 
 # Description
 “Novel Insights” is a book review application that allows users to rate/review and discover new books. Users can read reviews written by others to make informed decisions on what books they plan on reading in the future. By providing a platform for users to express their viewpoints, they can easily connect with other book lovers! 
