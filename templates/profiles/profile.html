@@ -33,7 +33,7 @@
         <div class="left-s">
         <h2 class="header-1">{{profile_user.username}}'s Favorite Reads:</h2>
             {% for book in profile.favorite_books.all %}
-                <p class="my-fav-book"><a href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
+                <p class="my-fav-book"><a class = "rand-title" href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
             {% empty %}
                 <p class="my-fav-book">No favorite books.</p>
             {% endfor %}
