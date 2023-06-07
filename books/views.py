@@ -33,6 +33,10 @@ def displayBookInfo(request, book_id):
         reviews = reviews.order_by('-rating')  # Sort by most favorable
     elif sort_options == 'unfavorable':
         reviews = reviews.order_by('rating')  # Sort by least favorable
+    elif sort_options == 'helpful':
+        reviews = reviews.order_by('-likes')  # Sort by least favorable
+    elif sort_options == 'unhelpful':
+        reviews = reviews.order_by('-dislikes')  # Sort by least favorable    
 
     context = {
         "book": book,

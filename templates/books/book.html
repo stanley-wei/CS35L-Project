@@ -72,6 +72,8 @@
                 <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
                 <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
                 <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
+                <option value="helpful" {% if sort_options == 'helpful' %}selected{% endif %}>Most Helpful</option>
+                <option value="unhelpful" {% if sort_options == 'unhelpful' %}selected{% endif %}>Least Helpful</option>
             </select>
         </form>
         <br/>
