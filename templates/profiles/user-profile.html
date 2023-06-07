@@ -28,7 +28,7 @@
               {% for followed_user in profile.followed_users.all %}
                 <p><a class="user-title" href="{% url 'profiles:profile' followed_user.user_id %}">{{ followed_user.user.username }}</a></p>
               {% empty %}
-                <p>None</p>
+                <p class="no-follower">None</p>
               {% endfor %}
               </div>
             </div>
@@ -38,7 +38,7 @@
               {% for follower in profile.follower_users.all %}
                 <p><a class="user-title" href="{% url 'profiles:profile' follower.user_id %}">{{ follower.user.username }}</a></p>
               {% empty %}
-                <p>None</p>
+                <p class="no-follower">None</p>
               {% endfor %}
               </div>
             </div>
