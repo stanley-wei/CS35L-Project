@@ -8,6 +8,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13, blank=True)
 
     olid = models.CharField(max_length=11, blank=True)
+    num_pages = models.IntegerField(blank=True, null=True)
 
     @property
     def avg_rating(self):
