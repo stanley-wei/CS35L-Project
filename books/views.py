@@ -152,6 +152,10 @@ def CreateFromIsbn(request):
                         isbn=isbn,
                         pub_year = pub_year,
                         olid=edition.olid)
+        
+        if edition.pages:
+            book_obj.num_pages = edition.pages;
+
         book_obj.save()
 
     return redirect("books:view_book", book_id=book_obj.id)

@@ -45,16 +45,19 @@ a.go-back-button {
     font-family: Verdana;
     font-size: 15px;
     text-align: center;
-    margin-right:30px;
     font-weight: normal;
 }
 .book-published{
   font-family: Verdana;
   font-size: 15px;
   text-align: center;
-  margin-right:30px;
   font-weight: normal;
 }
+
+.book-pagenum {
+  text-align: center;
+}
+
 /* Styles for the split layout */
 .container {
     display: flex;
