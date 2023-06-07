@@ -132,7 +132,7 @@ a.go-back-button {
   }
   
   a.user-profile-button {
-    margin-top:20px;
+    /* margin-top:20px; */
     display: inline-flex;
     padding: 5px 10px;
     background-color: white; /* Set the background color */
@@ -143,6 +143,7 @@ a.go-back-button {
     font-weight:normal;
     font-size: 12px;
     max-width:fit-content;
+    margin-right: 20px;
   }
   a.user-profile-button:hover {
     background-color: #f2f2f2; /* Set the background color on hover */
@@ -176,17 +177,17 @@ a.go-back-button {
     padding: 5px;
   }
   
-.like-dislike-container {
+/* .like-dislike-container {
   margin: 0px;
   max-width: 500px;
   padding: 10px;
   justify-content: center;
-}
+} */
 
-form#like_review,
+/* form#like_review,
 form#dislike_review {
-  margin-top: 10px; /* Add some spacing between the buttons */
-}
+  margin-top: 10px; /* Add some spacing between the buttons 
+} */
 
 button.like-buttons {
   padding: 5px 10px;
@@ -197,6 +198,7 @@ button.like-buttons {
   color: #fff;
   cursor: pointer;
   margin: 0px 20px 0px 20px;
+  display: inline-flex
 }
 
 button.like-buttons:hover {
@@ -210,3 +212,24 @@ button.like-buttons:hover {
 .book_info {
   margin: auto;
 }
+
+.review-heading {
+  display: inline-flex;
+}
+
+/* .stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-flex;
+  font-size: var(--star-size);
+  font-family: Times;
+  line-height: 1;
+  margin-left: 20px;
+}
+
+.stars::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */

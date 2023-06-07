@@ -48,9 +48,27 @@
         {% else %}
             <h5 class ="personal-review">Your Review:</h5>
             <div style="margin-left: 30px;">
-                <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
-                <div class="Stars" style="--rating: {{user_review.rating}};" aria-label="Rating of this product is {{user_review.rating}} out of 5."></div>
-                <b class = "rating">{{ user_review.rating }}/5</b>
+                <div>
+                    <div class="review-heading">
+                        <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}" margin-right = 20px >{{ user.username }}</a>
+                        <div class="Stars" style="--rating: {{user_review.rating}};" aria-label="Rating of this product is {{user_review.rating}} out of 5."></div>
+                        <b class = "rating">{{ user_review.rating }}/5</b>
+                        <span class="container like-dislike-container">
+                            <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ user_review.id }}">
+                                <input type="hidden" name="reaction" value="like">
+                                <button class="like-buttons" type="submit"> Likes: {{user_review.likes.count}}</button>
+                            </form>
+                            <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ user_review.id }}">
+                                <input type="hidden" name="reaction" value="dislike">
+                                <button class="like-buttons" type="submit"> Dislikes: {{user_review.dislikes.count}}</button>
+                            </form>        
+                        </span>
+                    </div>
+                </div>
                 <h6 class = "user-rev">{{ user_review.text }}</h6>
 
                 <div>
@@ -65,6 +83,7 @@
                 <a href="{% url 'books:delete_review' book.id %}">
                     <button type="delete-rev" class="rev-button delete-button">Delete Review</button>
                 </a>
+
             </div>
             <br/>
         {% endif %}
