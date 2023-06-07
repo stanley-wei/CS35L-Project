@@ -77,6 +77,7 @@
 
         {% for review in reviews %}
             <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
+            <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
             <b class = "rating">{{ review.rating }}/5</b>
             <h6 class = "user-rev">{{ review.text }}</h6>
 
