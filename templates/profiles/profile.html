@@ -50,6 +50,7 @@
                     </div>
                     <div class="review-contents">
                         <p class="rating-prof">Rating: {{review.rating}}</p>
+                        <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
                         <p class="rating-prof">Review:</p>
                         <p class="user-rev">{{review.text}}</p>
                         {% if review.images %}

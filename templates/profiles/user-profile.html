@@ -66,7 +66,8 @@
               <b class="rev-for">Review for: <a class="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a></b>
             </div>
             <div class="review-contents">
-              <p class="rating-prof">Your Rating: {{review.rating}}</p>
+              <p class="rating-prof">Your Rating: {{review.rating}}/5</p>
+              <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
               <p class="rating-prof">Your Review:</p>
               <p class="user-rev">{{review.text}}</p>
               
