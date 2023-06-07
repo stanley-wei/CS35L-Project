@@ -173,6 +173,13 @@ a.go-back-button {
     padding: 5px;
   }
   
+.like-dislike-container {
+  margin: 0px;
+  max-width: 500px;
+  padding: 10px;
+  justify-content: center;
+}
+
 form#like_review,
 form#dislike_review {
   margin-top: 10px; /* Add some spacing between the buttons */
@@ -186,7 +193,7 @@ button.like-buttons {
   background-color: rgb(128, 203, 228);
   color: #fff;
   cursor: pointer;
-  margin-left: 250px;
+  margin: 0px 20px 0px 20px;
 }
 
 button.like-buttons:hover {

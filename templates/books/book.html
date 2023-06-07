@@ -79,28 +79,32 @@
         <br/>
 
         {% for review in reviews %}
-            <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
-            <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
-            <b class = "rating">{{ review.rating }}/5</b>
-            <h6 class = "user-rev">{{ review.text }}</h6>
+            <div class="review-container">
+                <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
+                <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
+                <b class = "rating">{{ review.rating }}/5</b>
+                <h6 class = "user-rev">{{ review.text }}</h6>
 
-            {% if review.images %}
-            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
-            {% endif %}
+                {% if review.images %}
+                <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
+                {% endif %}
 
-            <!--Like/Dislike Buttons for Reviews-->
-            <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
-                {% csrf_token %}
-                <input type="hidden" name="review_id" value="{{ review.id }}">
-                <input type="hidden" name="reaction" value="like">
-                <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
-            </form>
-            <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
-                {% csrf_token %}
-                <input type="hidden" name="review_id" value="{{ review.id }}">
-                <input type="hidden" name="reaction" value="dislike">
-                <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
-            </form>        
+                <!--Like/Dislike Buttons for Reviews-->
+                <div class="container like-dislike-container">
+                    <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                        {% csrf_token %}
+                        <input type="hidden" name="review_id" value="{{ review.id }}">
+                        <input type="hidden" name="reaction" value="like">
+                        <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
+                    </form>
+                    <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                        {% csrf_token %}
+                        <input type="hidden" name="review_id" value="{{ review.id }}">
+                        <input type="hidden" name="reaction" value="dislike">
+                        <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
+                    </form>        
+                </div>
+            </div>
         {% endfor %}
     <br/>
     </div>
