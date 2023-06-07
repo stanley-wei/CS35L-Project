@@ -1,9 +1,29 @@
-# Project Details
-Group Members: Krisha Chokshi, Nemi Desai, Veena Kommu, Stanley Wei, Emily Sun
+# Novel Insights 
+
+
+# Description
+“Novel Insights” is a book review application that allows users to rate/review and discover new books. Users can read reviews written by others to make informed decisions on what books they plan on reading in the future. By providing a platform for users to express their viewpoints, they can easily connect with other book lovers! 
+
+# Details
+Creators: Krisha Chokshi, Nemi Desai, Veena Kommu, Stanley Wei, Emily Sun
 
 Class: COM SCI 35L (Spring 2023)
 
 Professor: Paul Eggert
+
+# Key Features
+1. 
+2.
+3.
+4.
+5.
+6.
+
+# Bonus Features
+1. 
+2. 
+3. 
+4.
 
 # Installation Instructions
 *Note: requires Python3.*
