@@ -19,6 +19,9 @@
                 <h4 class = "review-book">{{ book.title }}</h4>
                 <h5 class="book-author">By {{ book.author }}</h5>
                 <h5 class="book-published">Published: {{ book.pub_year }}</h5>  
+                {% if book.num_pages %}
+                    <div class="book-pagenum" style="font-style: italic;">{{book.num_pages}} pages</div>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                     {% if book in profile.favorite_books.all %}
                         <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
@@ -117,6 +120,7 @@
     document.addEventListener('DOMContentLoaded', function() {
 
         var pjax = new Pjax({
+            elements: ["form.like-form", "form.dislike-form"],
             selectors: [".like-form", ".dislike-form", ".empty-div"],
             switches: {
                 ".like-form": Pjax.switches.outerHTML,

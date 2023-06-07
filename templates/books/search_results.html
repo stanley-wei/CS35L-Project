@@ -48,6 +48,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     document.addEventListener('DOMContentLoaded', function() {
         var pjax = new Pjax({
+            elements: ["form.sort-search-form"],
             selectors: [".search-results", ".empty-div"],
             switches: {
                 ".search-results": Pjax.switches.outerHTML,

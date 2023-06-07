@@ -34,21 +34,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             var pjax = new Pjax({
+                elements: ["form.isbn-form"],
                 selectors: [".isbn-form", ".isbn-result-container", ".empty-div"],
                 switches: {
                     ".isbn-form": Pjax.switches.outerHTML,
                     ".isbn-result-container": Pjax.switches.outerHTML,
                     ".empty-div": function(oldEl, newEl, options) {
                         oldEl.outerHTML = newEl.outerHTML
+                        {% if not book.id %}
+                            document.getElementById("book-result").href = "{% url 'books:create_from_isbn' %}" + "?isbn={{query_isbn}}";
+                        {% endif %}
                         pjax.refresh()
                         this.onSwitch()
                     },
                 }
             })
-            
-            {% if not book.id %}
-                document.getElementById("book-result").href = "{% url 'books:create_from_isbn' %}" + "?isbn={{query_isbn}}";
-            {% endif %}
         });
     </script>
 {% endblock %}
