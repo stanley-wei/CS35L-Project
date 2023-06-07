@@ -11,7 +11,7 @@
 
   <h4 class = "review-book">Reviewing "{{book.title}}" ({{book.pub_year}})</h4>
   <div class="review">
-    <form class = "rev-b" method="post">
+    <form class = "rev-b" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
         <p>
