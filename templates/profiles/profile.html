@@ -14,7 +14,7 @@
         <img src="{{ MEDIA_URL }}{{ profile.profile_picture }}" alt="Profile Picture">
     </div>
         {% endif %}
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and profile_user.username != request.user.username%}
         {% if profile in signed_in_user.followed_users.all %}
             <form id="unfollow" action="{% url 'profiles:follow_user' profile_user.id %}" method="POST">
                 {% csrf_token %}

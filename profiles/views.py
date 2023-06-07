@@ -79,8 +79,10 @@ def follow_user(request, user_id):
     
     if friend_profile in profile.followed_users.all():
         profile.followed_users.remove(friend_profile)
+        friend_profile.follower_users.remove(profile)
     else:
         profile.followed_users.add(friend_profile)
         friend_profile.follower_users.add(profile)
     profile.save()
+    friend_profile.save()
     return redirect("profiles:profile", user_id=user_id)
