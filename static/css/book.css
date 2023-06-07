@@ -32,7 +32,10 @@ a.go-back-button {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  margin-left:40px;
+}
+.center{
+  display: flex;
+  justify-content: center;
 }
 .personal-review{
     font-family: Verdana;

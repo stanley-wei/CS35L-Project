@@ -6,6 +6,8 @@
 <form class = "logout_form" method="post">
   {% csrf_token %}
   {{ form.as_p }}
+  <div class="center">
   <button class = "sub" type="submit">Log Out</button>
+  </div>
 </form>
 {% endblock %}
