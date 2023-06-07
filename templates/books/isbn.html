@@ -15,7 +15,7 @@
         <p>Enter the ISBN of the book you're looking for, and we'll see if we can find it.</p>
         <div class="isbn-search search-bar" style="margin-left: 15px;">
             <form id="isbn-search" class="isbn-form" method="GET" action="{% url 'books:search_isbn' %}">
-                <input type="text" name="isbn" placeholder="Enter ISBN10 here"
+                <input type="text" name="isbn" id="isbn-input" placeholder="Enter ISBN10 here"
                     {% if query_isbn %} value="{{query_isbn}}" {% endif %} />
             </form>
         </div>
@@ -46,7 +46,8 @@
                     ".empty-div": function(oldEl, newEl, options) {
                         oldEl.outerHTML = newEl.outerHTML
                         {% if not book.id %}
-                            document.getElementById("book-result").href = "{% url 'books:create_from_isbn' %}" + "?isbn={{query_isbn}}";
+                            document.getElementById("book-result").href = "{% url 'books:create_from_isbn' %}" + "?isbn=";
+                            document.getElementById("book-result").href += document.getElementById("isbn-input").value
                         {% endif %}
                         pjax.refresh()
                         this.onSwitch()
