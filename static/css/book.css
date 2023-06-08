@@ -64,6 +64,7 @@ a.go-back-button {
 /* Styles for the split layout */
 .container {
     display: flex;
+    padding-top: 8vh;
   }
   
   .left-section {
@@ -81,7 +82,7 @@ a.go-back-button {
   .reviews {
     font-family: Verdana, Arial, sans-serif; /* Specify alternative fallback fonts */
     font-size: 20px;
-    margin-top: 80px;
+    margin-top: 2em;
     font-weight: bold; /* Use "bold" instead of "normal" for a stronger emphasis */
   }
   

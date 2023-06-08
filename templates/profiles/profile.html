@@ -39,7 +39,7 @@
             {% for book in profile.favorite_books.all %}
                 <p class="my-fav-book"><a class = "rand-title" href="{% url 'books:view_book' book.id %}">{{ book.title }}</a></p>
             {% empty %}
-                <p class="my-fav-book">No favorite books.</p>
+                <p class="my-fav-book" style="padding: 5px 10px;">No favorite books.</p>
             {% endfor %}
         </div>
         <div class="right-s">
@@ -47,8 +47,8 @@
             <div class="review-block">
             {% for review in reviews %}
                 <div class="review-row">
-                    <div class="review-books">
-                        <b>Review for: 
+                    <div class="review-books" style="padding-top: .5em">
+                        <b class="rev-for">Review for: 
                             <a class="rand-title" href="{% url 'books:view_book' review.book.id %}">{{review.book.title}}</a>
                         </b>
                     </div>

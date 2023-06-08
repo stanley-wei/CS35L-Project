@@ -1,6 +1,7 @@
 .log-out{
     text-align:center;
     -webkit-text-stroke: 2px #426053;
+    padding-top: 8vh;
 
     font-family: 'Poppins';
     font-style: normal;
