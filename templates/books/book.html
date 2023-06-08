@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <title>{{book.title}}</title>
+{% endblock %}
+
 <!--h1,h2,h4 have already been used-->
 {% block content %}
 
@@ -24,15 +28,19 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     {% if book in profile.favorite_books.all %}
+                        <div class="center">
                         <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
                             {% csrf_token %}
                             <button type="fav-submit"> Unfavorite </button>
                         </form>
+                        </div>
                     {% else %}
+                        <div class="center">
                         <form id="favorite" action="{% url 'books:favorite_book' book.id %}" method="POST">
                             {% csrf_token %}
                             <button type="fav-submit"> Favorite </button>
                         </form>
+                        </div>
                     {% endif %}
                 {% endif %}
             </div>

@@ -5,12 +5,17 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
+{% block head %}
+    <title>Home</title>
+{% endblock %}
 
 {% block content %}
-<head>
-    <title>Home Page</title>
-</head>
+
 <body>
-    <h1 class="home-title">Novel Insights</h1>
+    <div class="title-logo">
+        <h1 class="home-title">Novel Insights</h1>
+        <img src="/media/logo/Logo.png" alt="Logo">
+    </div>
 </body>
+
 {% endblock %}

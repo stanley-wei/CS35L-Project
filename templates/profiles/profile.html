@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
+{% block head %}
+    <title>Viewing {{profile_user.username}}'s Profile</title>
+{% endblock %}
+
 {% block content %}
     <div class="content-section">
     <h2 class = "user-back">{{profile_user.username}}'s Page</h2>

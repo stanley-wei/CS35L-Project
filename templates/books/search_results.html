@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
 {% endblock %}
 
+{% block head %}
+    <title>Search for "{{request.GET.query}}"</title>
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid">
         {% if results %}

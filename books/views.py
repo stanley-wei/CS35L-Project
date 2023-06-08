@@ -108,7 +108,6 @@ def FavoriteBook(request, book_id):
 def SearchIsbn(request):
     form = IsbnSearchForm(request.GET)
     query = None;
-
     book = None;
 
     if form.is_valid():
@@ -123,7 +122,13 @@ def SearchIsbn(request):
                 book = Book()
                 book.title = edition.title;
                 book.author = ', '.join(author_obj.name for author_obj in edition.authors)
-                t = re.search('\d{% s}'% 4, edition.publish_date)
+
+                try:
+                    work = ol.Work.get(edition.work_olid)
+                    date = work.first_publish_date
+                except:
+                    date = edition.publish_date
+                t = re.search('\d{% s}'% 4, date)
                 book.pub_year = (int(t.group(0)) if t else None)
                 book.olid = edition.olid
 
@@ -143,8 +148,13 @@ def CreateFromIsbn(request):
     except:
         ol = OpenLibrary()
         edition = ol.Edition.get(isbn=isbn)
-
-        t = re.search('\d{% s}'% 4, edition.publish_date)
+                
+        try:
+            work = ol.Work.get(edition.work_olid)
+            date = work.first_publish_date
+        except:
+            date = edition.publish_date
+        t = re.search('\d{% s}'% 4, date)
         pub_year = (int(t.group(0)) if t else None)
 
         book_obj = Book(title = edition.title, 
