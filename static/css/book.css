@@ -96,6 +96,7 @@ a.go-back-button {
     text-decoration: none;
     cursor: pointer;
 }
+
 .rating{
   font-family:Verdana;
   font-weight:normal;
@@ -109,8 +110,9 @@ a.go-back-button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
-    max-width: 500px;
+    /* max-width: 500px; */
     min-height: 100px;
+    margin-right: 3vw;
 }
 .write-rev-button{
   padding: 5px 10px;
@@ -149,8 +151,9 @@ a.go-back-button {
     background-color: #f2f2f2; /* Set the background color on hover */
   }
   form#sort-form {
-    margin-top: 40px;
-    margin-left:300px;
+    float: right;
+    margin-right: 3vw;
+    margin-bottom: 2vh;
   }
   
   label[for="sort"] {
@@ -176,18 +179,13 @@ a.go-back-button {
   select#sort option {
     padding: 5px;
   }
-  
-/* .like-dislike-container {
-  margin: 0px;
-  max-width: 500px;
-  padding: 10px;
-  justify-content: center;
-} */
 
-/* form#like_review,
-form#dislike_review {
-  margin-top: 10px; /* Add some spacing between the buttons 
-} */
+.like-dislike-right-align {
+  display: inline-flex;
+  float: right;
+  margin-left: auto;
+  margin-right: 2vw;
+}
 
 button.like-buttons {
   padding: 5px 10px;
@@ -214,22 +212,12 @@ button.like-buttons:hover {
 }
 
 .review-heading {
-  display: inline-flex;
+  display: block;
+  justify-content: space-between; 
 }
-
-/* .stars {
-  --percent: calc(var(--rating) / 5 * 100%);
-  display: inline-flex;
-  font-size: var(--star-size);
-  font-family: Times;
-  line-height: 1;
-  margin-left: 20px;
+.review-container {
+  display: block;
 }
-
-.stars::before {
-  content: "★★★★★";
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-} */
+.margin {
+  padding: 10px;
+}
