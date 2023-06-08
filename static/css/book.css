@@ -36,6 +36,7 @@ a.go-back-button {
 .center{
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 }
 .personal-review{
     font-family: Verdana;
@@ -59,6 +60,7 @@ a.go-back-button {
 
 .book-pagenum {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Styles for the split layout */

@@ -10,15 +10,6 @@
 <div class="container">
     <div class="left-section">
         <div class = "container-fluid">
-            {% if book.isbn or book.olid %}
-                <div>
-                    {% if book.olid %}
-                        <img src="https://covers.openlibrary.org/b/olid/{{book.olid}}-L.jpg" alt="Image of book" style="float:left;"  class="book-image">
-                    {% elif book.isbn %}
-                        <img src="https://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg" alt="Image of book" style="float:left;"  class="book-image">
-                    {% endif %}
-                </div>
-            {% endif %}
             <div class = "book-info container-fluid">
                 <h4 class = "review-book">{{ book.title }}</h4>
                 <h5 class="book-author">By {{ book.author }}</h5>
@@ -45,6 +36,15 @@
                 {% endif %}
             </div>
         </div>
+        {% if book.isbn or book.olid %}
+            <div class = "center">
+                {% if book.olid %}
+                    <img src="https://covers.openlibrary.org/b/olid/{{book.olid}}-L.jpg" alt="Image of book" style="float:center;"  class="book-image">
+                {% elif book.isbn %}
+                    <img src="https://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg" alt="Image of book" style="float:center;"  class="book-image">
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
     <div class="right-section">
         <h3 class = "reviews">Reviews</h3>
