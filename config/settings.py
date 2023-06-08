@@ -88,8 +88,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cs35lproject$default',
+        'USER': 'cs35lproject',
+        'PASSWORD': '5rPk}^$k}GjU3aB',
+        'HOST': 'cs35lproject.mysql.pythonanywhere-services.com',
     }
 }
 

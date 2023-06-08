@@ -21,6 +21,7 @@ jsonpatch==1.32
 jsonpickle==0.9.3
 jsonpointer==2.3
 jsonschema==3.2.0
+mysqlclient==2.1.1
 oauthlib==3.2.2
 openlibrary-client==0.0.30
 Pillow==9.5.0
