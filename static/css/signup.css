@@ -58,8 +58,8 @@
 
   /* Styling for the submit button */
   form button[type="submit"] {
-    margin-top:20px;
-    padding: 10px 20px;
+    margin-top: 0px;
+    padding: 5px 10px;
     background-color: rgb(83, 181, 214);
     color: white;
     border: none;

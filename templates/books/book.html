@@ -55,20 +55,37 @@
             {% endif %}
         {% else %}
             <h5 class ="personal-review">Your Review:</h5>
-            <div style="margin-left: 30px;">
-                <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}">{{ user.username }}</a>
-                <div class="Stars" style="--rating: {{user_review.rating}};" aria-label="Rating of this product is {{user_review.rating}} out of 5."></div>
-                <b class = "rating">{{ user_review.rating }}/5</b>
+            <div class = "review-container">
+                <div style="margin-left: 30px;">
+                    <div class="review-heading">
+                        <a class="user-profile-button" href="{% url 'profiles:profile' user.id %}" >{{ user.username }}</a>
+                        <div class="Stars" style="--rating: {{user_review.rating}};" aria-label="Rating of this product is {{user_review.rating}} out of 5."></div>
+                        <b class = "rating">{{ user_review.rating }}/5</b>
+                        <span class="like-dislike-right-align">
+                            <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ user_review.id }}">
+                                <input type="hidden" name="reaction" value="like">
+                                <button class="like-buttons" type="submit"> Likes: {{user_review.likes.count}}</button>
+                            </form>
+                            <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ user_review.id }}">
+                                <input type="hidden" name="reaction" value="dislike">
+                                <button class="like-buttons" type="submit"> Dislikes: {{user_review.dislikes.count}}</button>
+                            </form>   
+                        </span>
+                    </div>
                 <h6 class = "user-rev">{{ user_review.text }}</h6>
-
-                <div>
+                </div>
+                <div style="margin-left: 30px;">
                 {% if user_review.images %}
                 <img src="{{ MEDIA_URL }}{{ user_review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
                 {% endif %}
                 </div>
 
                 <a href="{% url 'books:edit_review' book.id %}">
-                    <button type="edit-rev" class="rev-button">Edit Review</button>
+                    <button type="edit-rev" class="rev-button" style="margin-left: 30px;">Edit Review</button>
                 </a>
                 <a href="{% url 'books:delete_review' book.id %}">
                     <button type="delete-rev" class="rev-button delete-button">Delete Review</button>
@@ -76,46 +93,51 @@
             </div>
             <br/>
         {% endif %}
-
-        <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
-            <label for="sort">Sort reviews by:</label>
-            <select id="sort" name="sort">
-                <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
-                <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
-                <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
-                <option value="helpful" {% if sort_options == 'helpful' %}selected{% endif %}>Most Helpful</option>
-                <option value="unhelpful" {% if sort_options == 'unhelpful' %}selected{% endif %}>Least Helpful</option>
-            </select>
-        </form>
+        <div>
+            <form id="sort-form" method="GET" action="{% url 'books:view_book' book.id %}">
+                <label for="sort">Sort reviews by:</label>
+                <select id="sort" name="sort">
+                    <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
+                    <option value="favorable" {% if sort_options == 'favorable' %}selected{% endif %}>Most Favorable</option>
+                    <option value="unfavorable" {% if sort_options == 'unfavorable' %}selected{% endif %}>Least Favorable</option>
+                    <option value="helpful" {% if sort_options == 'helpful' %}selected{% endif %}>Most Helpful</option>
+                    <option value="unhelpful" {% if sort_options == 'unhelpful' %}selected{% endif %}>Least Helpful</option>
+                </select>
+            </form>
+        </div>
         <br/>
-
+        <div class="margin"><p></p></div>
         {% for review in reviews %}
-            <div class="review-container">
-                <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}">{{ review.user.username }}</a>
-                <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
-                <b class = "rating">{{ review.rating }}/5</b>
-                <h6 class = "user-rev">{{ review.text }}</h6>
-
-                {% if review.images %}
-                <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
-                {% endif %}
-
-                <!--Like/Dislike Buttons for Reviews-->
-                <div class="container like-dislike-container">
-                    <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
-                        {% csrf_token %}
-                        <input type="hidden" name="review_id" value="{{ review.id }}">
-                        <input type="hidden" name="reaction" value="like">
-                        <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
-                    </form>
-                    <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
-                        {% csrf_token %}
-                        <input type="hidden" name="review_id" value="{{ review.id }}">
-                        <input type="hidden" name="reaction" value="dislike">
-                        <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
-                    </form>        
+        <div class = "review-container">
+            <div>
+                <div>
+                    <div class="review-heading">
+                        <a class="user-profile-button" href="{% url 'profiles:profile' review.user.id %}" margin-right = 20px >{{ review.user.username }}</a>
+                        <div class="Stars" style="--rating: {{review.rating}};" aria-label="Rating of this product is {{review.rating}} out of 5."></div>
+                        <b class = "rating">{{ review.rating }}/5</b>
+                        <span class="like-dislike-right-align">
+                            <form id="like_review" class="like-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ review.id }}">
+                                <input type="hidden" name="reaction" value="like">
+                                <button class="like-buttons" type="submit"> Likes: {{review.likes.count}}</button>
+                            </form>
+                            <form id="dislike_review" class="dislike-form" action="{% url 'books:like_dislike' book.id %}" method="POST" data-pjax>
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ review.id }}">
+                                <input type="hidden" name="reaction" value="dislike">
+                                <button class="like-buttons" type="submit"> Dislikes: {{review.dislikes.count}}</button>
+                            </form>        
+                        </span>
+                    </div>
                 </div>
+                <h6 class = "user-rev">{{ review.text }}</h6>
             </div>
+            <div>
+            {% if review.images %}
+            <img src="{{ MEDIA_URL }}{{ review.images }}" alt="Review Image" style="width: 40%; height: 100%;">
+            {% endif %}
+        </div>
         {% endfor %}
     <br/>
     </div>

@@ -99,6 +99,7 @@ a.go-back-button {
     text-decoration: none;
     cursor: pointer;
 }
+
 .rating{
   font-family:Verdana;
   font-weight:normal;
@@ -112,8 +113,9 @@ a.go-back-button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
-    max-width: 500px;
+    /* max-width: 500px; */
     min-height: 100px;
+    margin-right: 3vw;
 }
 .write-rev-button{
   padding: 5px 10px;
@@ -135,7 +137,7 @@ a.go-back-button {
   }
   
   a.user-profile-button {
-    margin-top:20px;
+    /* margin-top:20px; */
     display: inline-flex;
     padding: 5px 10px;
     background-color: white; /* Set the background color */
@@ -146,13 +148,15 @@ a.go-back-button {
     font-weight:normal;
     font-size: 12px;
     max-width:fit-content;
+    margin-right: 20px;
   }
   a.user-profile-button:hover {
     background-color: #f2f2f2; /* Set the background color on hover */
   }
   form#sort-form {
-    margin-top: 40px;
-    margin-left:300px;
+    float: right;
+    margin-right: 3vw;
+    margin-bottom: 2vh;
   }
   
   label[for="sort"] {
@@ -178,17 +182,12 @@ a.go-back-button {
   select#sort option {
     padding: 5px;
   }
-  
-.like-dislike-container {
-  margin: 0px;
-  max-width: 500px;
-  padding: 10px;
-  justify-content: center;
-}
 
-form#like_review,
-form#dislike_review {
-  margin-top: 10px; /* Add some spacing between the buttons */
+.like-dislike-right-align {
+  display: inline-flex;
+  float: right;
+  margin-left: auto;
+  margin-right: 2vw;
 }
 
 button.like-buttons {
@@ -200,6 +199,7 @@ button.like-buttons {
   color: #fff;
   cursor: pointer;
   margin: 0px 20px 0px 20px;
+  display: inline-flex
 }
 
 button.like-buttons:hover {
@@ -212,4 +212,15 @@ button.like-buttons:hover {
 
 .book_info {
   margin: auto;
+}
+
+.review-heading {
+  display: block;
+  justify-content: space-between; 
+}
+.review-container {
+  display: block;
+}
+.margin {
+  padding: 10px;
 }
