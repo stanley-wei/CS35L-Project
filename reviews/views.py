@@ -21,6 +21,7 @@ def MakeReview(request, book_id):
                 past_reviews.delete()
 
             review = Review(user=request.user, book=Book.objects.get(pk=book_id), rating=form.cleaned_data["rating"], text=form.cleaned_data["text"])
+            review.images = form.cleaned_data["images"]
             review.save()
             # process the data in form.cleaned_data as required
             # ...
@@ -37,11 +38,12 @@ def MakeReview(request, book_id):
 def EditReview(request, book_id):
     review = Review.objects.filter(user=request.user, book__id=book_id)[0]
     if request.method == "POST":
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
 
         if form.is_valid():
             review.rating = form.cleaned_data["rating"]
             review.text = form.cleaned_data["text"]
+            review.images = form.cleaned_data["images"]
             review.save()
 
             return HttpResponseRedirect(reverse("books:view_book", args=(book_id,)))
