@@ -93,7 +93,7 @@ def SearchBooks(request):
 
         sort_options = request.GET.get('sort-search')
         if sort_options == 'alphabetical':
-            results = results.order_by('title')
+            results = sorted(results, key=lambda book: book.title)
         elif sort_options == 'highest-rated':
             results = sorted(results, key=lambda book: book.avg_rating, reverse=True)
         elif sort_options == 'lowest-rated':
