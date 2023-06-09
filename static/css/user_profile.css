@@ -106,6 +106,7 @@ form {
 
 .no-follower{
   margin: 25px 20px;
+  padding: 5px 10px;
     justify-content: center;
     background-color: rgb(214, 227, 238); /* Set the background color */
     color: black; /* Set the text color */
