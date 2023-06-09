@@ -4,8 +4,9 @@
   font-family: Verdana;
   text-transform: lowercase;
   text-align: center;
-  font-weight: normal;
+  font-weight: bolder;
   font-size: 25px;
+  padding-top: 8vh;
   }
   
 .fields-detail {
