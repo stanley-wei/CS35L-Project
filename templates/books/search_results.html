@@ -11,16 +11,33 @@
 
 {% block content %}
     <div class="container-fluid">
-        {% if results %}
             <form id="sort-search-form" class="sort-search-form" method="GET" action="{% url 'books:search_books' %}">
                 <div class= "sort-search">
-                <label for="sort-search">Sort results by:</label>
-                <select id="sort-search" name="sort-search">
-                    <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
-                    <option value="alphabetical" {% if sort_options == 'alphabetical' %}selected{% endif %}>Alphabetical</option>
-                    <option value="highest-rated" {% if sort_options == 'highest-rated' %}selected{% endif %}>Highest Rated</option>
-                    <option value="lowest-rated" {% if sort_options == 'lowest-rated' %}selected{% endif %}>Lowest Rated</option>
-                </select>
+                    <button type="button" class="collapsible hamburger-menu-button" id="collapsible-button">
+                        <span class="hamburger">
+                            <div class="hamburger-icon"></div>
+                            <div class="hamburger-icon"></div>
+                            <div class="hamburger-icon"></div>
+                        </span>
+                        <span class="content"> View Filters</span>
+                    </button>
+                    <div class="collapsible-content" id="collapsible-content">
+                        <div class="input-block">
+                            <label for="sort-search">Sort results by:</label>
+                            <select id="sort-search" name="sort-search">
+                                <option value="" {% if sort_options == '' %}selected{% endif %}>No Filter</option>
+                                <option value="alphabetical" {% if sort_options == 'alphabetical' %}selected{% endif %}>Alphabetical</option>
+                                <option value="highest-rated" {% if sort_options == 'highest-rated' %}selected{% endif %}>Highest Rated</option>
+                                <option value="lowest-rated" {% if sort_options == 'lowest-rated' %}selected{% endif %}>Lowest Rated</option>
+                            </select>
+                        </div>
+                        <div class="input-block">
+                            Score: <input type="number" class="short-input filter-option" name="min" min="1" max="5" placeholder="Min Rating"> - <input type="number" class="short-input filter-option" name="max" min="1" max="5" placeholder="Max Rating">
+                        </div>
+                        <div class="input-block">
+                            Year Range: <input type="number" class="short-input filter-option" name="after" step="1" placeholder="Min Year"> - <input type="number" class="short-input filter-option" name="before" step="1" placeholder="Max Year">
+                        </div>
+                    </div>
                 </div>
             </form>
             <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a>
@@ -29,7 +46,7 @@
         <h2 class="search-statement">
             {% if results|length == 1 %}
                 Showing 1 result for "{{request.GET.query}}":
-            {% else %}
+            {% elif results|length %}
                 Showing {{ results|length }} results for "{{request.GET.query}}":
             {% endif %}
         </h2>
@@ -40,7 +57,7 @@
             {% endfor %}
         </div>
 
-        {% else %}
+        {% if not results %}
             <p class="no-results">No results found. <a href="{% url 'books:search_isbn' %}" class="isbn-statement">(Can't find your book?)</a></p>
         {% endif %}
     </div>
@@ -53,8 +70,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         var pjax = new Pjax({
             elements: ["form.sort-search-form"],
-            selectors: [".search-results", ".empty-div"],
+            selectors: [".search-statement", ".search-results", ".empty-div"],
             switches: {
+                ".search-statement": Pjax.switches.outerHTML,
                 ".search-results": Pjax.switches.outerHTML,
                 ".empty-div": function(oldEl, newEl, options) {
                     oldEl.outerHTML = newEl.outerHTML
@@ -83,6 +101,23 @@
             url.searchParams.set('query', urlParams.get('query'));
             pjax.loadUrl(url.toString())
             // window.location.href = url;
+        });
+
+        var filter_inputs = document.getElementsByClassName("filter-option");
+        for (var i = 0; i < filter_inputs.length; i++) {
+            filter_inputs.item(i).addEventListener("change", function () {
+                url.searchParams.set(this.name, this.value);
+                pjax.loadUrl(url.toString())
+            })
+        }
+
+        document.getElementById("collapsible-button").addEventListener("click", function() {
+            var content = document.getElementById("collapsible-content")
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
         });
     });
 </script>

@@ -72,14 +72,42 @@
     font-weight: bold;   
 }
 
+.collapsible {
+    cursor: pointer;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+  }
 
+.collapsible .content {
+    margin-left: 5px;
+}
 
+.collapsible-content {
+padding: 0 18px;
+display: none;
+overflow: hidden;
+margin-bottom: 10px;
+}
 
+.collapsible-content .input-block {
+    margin: 10px 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
+.collapsible-content .short-input {
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+}
 
+.short-input[type="number"]::-webkit-outer-spin-button,
+.short-input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-
-
-
-
-
+.short-input[type="number"] {
+    -moz-appearance: textfield;
+}

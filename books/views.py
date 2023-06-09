@@ -71,11 +71,25 @@ def SearchBooks(request):
     if form.is_valid():
         query = form.cleaned_data['query']
         field = request.GET.get('field', 'title')
+        min_score = request.GET.get('min')
+        max_score = request.GET.get('max')
+        min_year = request.GET.get('after')
+        max_year = request.GET.get('before')
 
         if field == 'author':
             results = Book.objects.filter(Q(author__icontains=query))
         else:
             results = Book.objects.filter(Q(title__icontains=query))
+
+        if min_score:
+            results = [result for result in results if result.avg_rating >= float(min_score)]
+        if max_score:
+            results = [result for result in results if result.avg_rating <= float(max_score)]
+
+        if min_year:
+            results = results.filter(pub_year__gte=int(min_year))
+        if max_year:
+            results = results.filter(pub_year__lte=int(max_year))
 
         sort_options = request.GET.get('sort-search')
         if sort_options == 'alphabetical':
