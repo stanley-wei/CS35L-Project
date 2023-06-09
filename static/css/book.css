@@ -219,7 +219,7 @@ button.like-buttons:hover {
 
 .review-heading {
   display: block;
-  justify-content: space-between; 
+  margin-top: 1em;
 }
 .review-container {
   display: block;
